@@ -79,7 +79,8 @@
  			<button onclick="mapSearch()">위치 검색</button>
  			<hr color="black" style="width:500px" align="left">
  			
- 			<select id="select1" onchange="cityChange()" style="width:250px; height:35px">
+ 			<form name="dong">
+ 			<select id="select1" name="g" onchange="cityChange()" style="width:250px; height:35px">
  				<option label="자치구 를 선택하여 주십시오"></option>
 				<option>강남구</option>
 				<option>강동구</option>
@@ -107,9 +108,11 @@
 				<option>중구</option>
 				<option>중랑구</option>
 			</select>
-				 
-			<select id="select2" style="width:250px; height:35px">
+			
+			<select id="select2" name="d" style="width:250px; height:35px">
 			</select>
+			<input type="button" value="동 검색" onclick="mapSearch2()">
+			</form>
 
  			<hr color="black" style="width:500px" align="left">
  			
@@ -126,8 +129,6 @@
              <hr color="black" style="width:500px" align="left">             
              
              <input type="text" placeholder="동일 업종" style="width:500px; height:35px">
-             
-             
              
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55d81c6e682f667cceb61a2a681598bf&libraries=services"></script>
@@ -211,354 +212,46 @@ function mapSearch() {
 //=============================================================================================================
 //=============================================================================================================
 
-// 지도에 폴리곤으로 표시할 영역데이터 배열입니다 
-var areas = [
-    {
-        name : '용산구',
-        path : [new daum.maps.LatLng(37.5548768201904, 126.96966524449994),
-            new daum.maps.LatLng(37.55308718044556, 126.97642899633566),
-            new daum.maps.LatLng(37.55522076659584, 126.97654602427454),
-            new daum.maps.LatLng(37.55320655210504, 126.97874667968763),
-            new daum.maps.LatLng(37.55368689494708, 126.98541456064552),
-            new daum.maps.LatLng(37.54722934282707, 126.995229135048),
-            new daum.maps.LatLng(37.549694559809545, 126.99832516302801),
-            new daum.maps.LatLng(37.550159406110104, 127.00436818301327),
-            new daum.maps.LatLng(37.54820235864802, 127.0061334023129),
-            new daum.maps.LatLng(37.546169758665414, 127.00499711608721),
-            new daum.maps.LatLng(37.54385947805103, 127.00727818360471),
-            new daum.maps.LatLng(37.54413326436179, 127.00898460651953),
-            new daum.maps.LatLng(37.539639030116945, 127.00959054834321),
-            new daum.maps.LatLng(37.537681185520256, 127.01726163044557),
-            new daum.maps.LatLng(37.53378887274516, 127.01719284893274),
-            new daum.maps.LatLng(37.52290225898471, 127.00614038053493),
-            new daum.maps.LatLng(37.51309192794448, 126.99070240960813),
-            new daum.maps.LatLng(37.50654651085339, 126.98553683648308),
-            new daum.maps.LatLng(37.50702053393398, 126.97524914998174),
-            new daum.maps.LatLng(37.51751820477105, 126.94988506562748),
-            new daum.maps.LatLng(37.52702918583156, 126.94987870367682),
-            new daum.maps.LatLng(37.534519656862926, 126.94481851935942),
-            new daum.maps.LatLng(37.537500243531994, 126.95335659960566),
-            new daum.maps.LatLng(37.54231338779177, 126.95817394011969),
-            new daum.maps.LatLng(37.54546318600178, 126.95790512689311),
-            new daum.maps.LatLng(37.548791603525764, 126.96371984820232),
-            new daum.maps.LatLng(37.55155543391863, 126.96233786542686),
-            new daum.maps.LatLng(37.5541513366375, 126.9657135934734),
-            new daum.maps.LatLng(37.55566236579088, 126.9691850696746),
-            new daum.maps.LatLng(37.5548768201904, 126.96966524449994)
-        ]},
-     {
-        	name : '종로구',
-            path : [new daum.maps.LatLng(37.544062989758594, 127.00854659142894),
-                new daum.maps.LatLng(37.54385947805103, 127.00727818360471),
-                new daum.maps.LatLng(37.546169758665414, 127.00499711608721),
-                new daum.maps.LatLng(37.54820235864802, 127.0061334023129),
-                new daum.maps.LatLng(37.550159406110104, 127.00436818301327),
-                new daum.maps.LatLng(37.549694559809545, 126.99832516302801),
-                new daum.maps.LatLng(37.54722934282707, 126.995229135048),
-                new daum.maps.LatLng(37.55368689494708, 126.98541456064552),
-                new daum.maps.LatLng(37.55320655210504, 126.97874667968763),
-                new daum.maps.LatLng(37.55522076659584, 126.97654602427454),
-                new daum.maps.LatLng(37.55308718044556, 126.97642899633566),
-                new daum.maps.LatLng(37.55487749311664, 126.97240854546743),
-                new daum.maps.LatLng(37.5548766923893, 126.9691718124876),
-                new daum.maps.LatLng(37.55566236579088, 126.9691850696746),
-                new daum.maps.LatLng(37.55155543391863, 126.96233786542686),
-                new daum.maps.LatLng(37.55498984534305, 126.96173858545431),
-                new daum.maps.LatLng(37.55695455613004, 126.96343068837372),
-                new daum.maps.LatLng(37.5590262922649, 126.9616731414449),
-                new daum.maps.LatLng(37.56197662569172, 126.96946316364357),
-                new daum.maps.LatLng(37.56582132960869, 126.96669525397355),
-                new daum.maps.LatLng(37.56824746386509, 126.96909838710842),
-                new daum.maps.LatLng(37.569485309984174, 126.97637402412326),
-                new daum.maps.LatLng(37.56810323716611, 126.98905202099309),
-                new daum.maps.LatLng(37.56961739576364, 127.00225936812329),
-                new daum.maps.LatLng(37.56966688588187, 127.0152677241078),
-                new daum.maps.LatLng(37.572022763755164, 127.0223363152772),
-                new daum.maps.LatLng(37.57190723475508, 127.02337770475695),
-                new daum.maps.LatLng(37.56973041414113, 127.0234585247501),
-                new daum.maps.LatLng(37.565200182350495, 127.02358387477513),
-                new daum.maps.LatLng(37.56505173515675, 127.02678930885806),
-                new daum.maps.LatLng(37.563390358462826, 127.02652159646888),
-                new daum.maps.LatLng(37.5607276739534, 127.02339232029838),
-                new daum.maps.LatLng(37.55779412537163, 127.0228934248264),
-                new daum.maps.LatLng(37.556850715898484, 127.01807638779917),
-                new daum.maps.LatLng(37.55264513061776, 127.01620129137214),
-                new daum.maps.LatLng(37.547466935106435, 127.00931996404753),
-                new daum.maps.LatLng(37.54502351209897, 127.00815187343248),
-                new daum.maps.LatLng(37.544062989758594, 127.00854659142894)
-            ]},
-            {
-                name : '종로구',
-                path : [
-                    new daum.maps.LatLng(37.631840777111364, 126.9749313865046),
-                    new daum.maps.LatLng(37.632194205253654, 126.97609588529602),
-                    new daum.maps.LatLng(37.629026103322374, 126.97496405167149),
-                    new daum.maps.LatLng(37.6285585388996, 126.97992605309885),
-                    new daum.maps.LatLng(37.626378096236195, 126.97960492198952),
-                    new daum.maps.LatLng(37.6211493968146, 126.98365245774505),
-                    new daum.maps.LatLng(37.6177725051378, 126.9837302191854),
-                    new daum.maps.LatLng(37.613985109550605, 126.98658977758268),
-                    new daum.maps.LatLng(37.611364924201304, 126.98565700183143),
-                    new daum.maps.LatLng(37.60401657024552, 126.98665951539246),
-                    new daum.maps.LatLng(37.60099164566844, 126.97852019816328),
-                    new daum.maps.LatLng(37.59790270809407, 126.97672287261275),
-                    new daum.maps.LatLng(37.59447673441787, 126.98544283754865),
-                    new daum.maps.LatLng(37.59126960661375, 126.98919808879788),
-                    new daum.maps.LatLng(37.592300831997434, 127.0009511248032),
-                    new daum.maps.LatLng(37.58922302426079, 127.00228260552726),
-                    new daum.maps.LatLng(37.586091007146834, 127.00667090686603),
-                    new daum.maps.LatLng(37.58235007703611, 127.00677925856456),
-                    new daum.maps.LatLng(37.58047228501006, 127.00863575242668),
-                    new daum.maps.LatLng(37.58025588757531, 127.01058748333907),
-                    new daum.maps.LatLng(37.582338528091164, 127.01483104096094),
-                    new daum.maps.LatLng(37.581693162424465, 127.01673289259993),
-                    new daum.maps.LatLng(37.57758802896556, 127.01812215416163),
-                    new daum.maps.LatLng(37.5788668917658, 127.02140099081309),
-                    new daum.maps.LatLng(37.578034045208426, 127.02313962015988),
-                    new daum.maps.LatLng(37.57190723475508, 127.02337770475695),
-                    new daum.maps.LatLng(37.56966688588187, 127.0152677241078),
-                    new daum.maps.LatLng(37.56961739576364, 127.00225936812329),
-                    new daum.maps.LatLng(37.5681357695346, 126.99014772014593),
-                    new daum.maps.LatLng(37.569315246023024, 126.9732046364419),
-                    new daum.maps.LatLng(37.56824746386509, 126.96909838710842),
-                    new daum.maps.LatLng(37.56582132960869, 126.96669525397355),
-                    new daum.maps.LatLng(37.57874076105342, 126.95354824618335),
-                    new daum.maps.LatLng(37.581020184166476, 126.95812059678624),
-                    new daum.maps.LatLng(37.59354736740056, 126.95750665936443),
-                    new daum.maps.LatLng(37.595061575856455, 126.9590412421402),
-                    new daum.maps.LatLng(37.59833350100327, 126.9576941779143),
-                    new daum.maps.LatLng(37.59875701675023, 126.95306020161668),
-                    new daum.maps.LatLng(37.602476031211225, 126.95237386792348),
-                    new daum.maps.LatLng(37.60507154496655, 126.95404376087069),
-                    new daum.maps.LatLng(37.60912809443569, 126.95032198271032),
-                    new daum.maps.LatLng(37.615539700280216, 126.95072546923387),
-                    new daum.maps.LatLng(37.62433621196653, 126.94900237336302),
-                    new daum.maps.LatLng(37.62642708817027, 126.95037844036497),
-                    new daum.maps.LatLng(37.629590994617104, 126.95881385457929),
-                    new daum.maps.LatLng(37.629794440379136, 126.96376660599225),
-                    new daum.maps.LatLng(37.632373740990175, 126.97302793692637),
-                    new daum.maps.LatLng(37.631840777111364, 126.9749313865046)
-                ]
-            }, {
-                name : '서대문구',
-                path : [
-                    new daum.maps.LatLng(37.59851932019209, 126.95347706883003),
-                    new daum.maps.LatLng(37.5992407011344, 126.95499403097206),
-                    new daum.maps.LatLng(37.59833350100327, 126.9576941779143),
-                    new daum.maps.LatLng(37.595061575856455, 126.9590412421402),
-                    new daum.maps.LatLng(37.59354736740056, 126.95750665936443),
-                    new daum.maps.LatLng(37.581020184166476, 126.95812059678624),
-                    new daum.maps.LatLng(37.57874076105342, 126.95354824618335),
-                    new daum.maps.LatLng(37.56197662569172, 126.96946316364357),
-                    new daum.maps.LatLng(37.5575156365052, 126.95991288916548),
-                    new daum.maps.LatLng(37.55654562007193, 126.9413708153468),
-                    new daum.maps.LatLng(37.555098093384, 126.93685861757348),
-                    new daum.maps.LatLng(37.55884751347576, 126.92659242918415),
-                    new daum.maps.LatLng(37.5633319104926, 126.92828128083327),
-                    new daum.maps.LatLng(37.56510367293256, 126.92601582346325),
-                    new daum.maps.LatLng(37.57082994377989, 126.9098094620638),
-                    new daum.maps.LatLng(37.57599550420081, 126.902091747923),
-                    new daum.maps.LatLng(37.587223103650295, 126.91284666446226),
-                    new daum.maps.LatLng(37.58541570520177, 126.91531241017965),
-                    new daum.maps.LatLng(37.585870567159255, 126.91638068573187),
-                    new daum.maps.LatLng(37.583095195853055, 126.9159399866114),
-                    new daum.maps.LatLng(37.583459593417196, 126.92175886498167),
-                    new daum.maps.LatLng(37.587104600730505, 126.92388813813815),
-                    new daum.maps.LatLng(37.588386594820484, 126.92800815682232),
-                    new daum.maps.LatLng(37.59157595859555, 126.92776504133688),
-                    new daum.maps.LatLng(37.59455434247408, 126.93027139545339),
-                    new daum.maps.LatLng(37.59869748704149, 126.94088480070904),
-                    new daum.maps.LatLng(37.60065830191363, 126.9414041615336),
-                    new daum.maps.LatLng(37.60305781086164, 126.93995273804141),
-                    new daum.maps.LatLng(37.610598531321436, 126.95037536795142),
-                    new daum.maps.LatLng(37.6083605525023, 126.95056259057313),
-                    new daum.maps.LatLng(37.60507154496655, 126.95404376087069),
-                    new daum.maps.LatLng(37.602476031211225, 126.95237386792348),
-                    new daum.maps.LatLng(37.59851932019209, 126.95347706883003)
-                ]
-            }, {
-                name : '동대문구',
-                path : [
-                    new daum.maps.LatLng(37.607062869017085, 127.07111288773496),
-                    new daum.maps.LatLng(37.60107201319839, 127.07287376670605),
-                    new daum.maps.LatLng(37.59724304056685, 127.06949105186925),
-                    new daum.maps.LatLng(37.58953367466315, 127.07030363208528),
-                    new daum.maps.LatLng(37.58651213184981, 127.07264218709383),
-                    new daum.maps.LatLng(37.5849555116177, 127.07216063016078),
-                    new daum.maps.LatLng(37.58026781100598, 127.07619547037923),
-                    new daum.maps.LatLng(37.571869232268774, 127.0782018408153),
-                    new daum.maps.LatLng(37.559961773835425, 127.07239004251258),
-                    new daum.maps.LatLng(37.56231553903832, 127.05876047165025),
-                    new daum.maps.LatLng(37.57038253579033, 127.04794980454399),
-                    new daum.maps.LatLng(37.572878529071055, 127.04263554582458),
-                    new daum.maps.LatLng(37.57302061077518, 127.0381755492195),
-                    new daum.maps.LatLng(37.56978273516453, 127.03099733100001),
-                    new daum.maps.LatLng(37.57190723475508, 127.02337770475695),
-                    new daum.maps.LatLng(37.57838361223621, 127.0232348231103),
-                    new daum.maps.LatLng(37.58268174514337, 127.02953994610249),
-                    new daum.maps.LatLng(37.58894739851823, 127.03553876830637),
-                    new daum.maps.LatLng(37.5911852565689, 127.03621919708065),
-                    new daum.maps.LatLng(37.59126734230753, 127.03875553445558),
-                    new daum.maps.LatLng(37.5956815721534, 127.04062845365279),
-                    new daum.maps.LatLng(37.5969637344377, 127.04302522879048),
-                    new daum.maps.LatLng(37.59617641777492, 127.04734129391157),
-                    new daum.maps.LatLng(37.60117358544485, 127.05101351973708),
-                    new daum.maps.LatLng(37.600149587503246, 127.05209540476308),
-                    new daum.maps.LatLng(37.60132672748398, 127.05508130598699),
-                    new daum.maps.LatLng(37.6010580545608, 127.05917142337097),
-                    new daum.maps.LatLng(37.605121767227374, 127.06219611364686),
-                    new daum.maps.LatLng(37.607062869017085, 127.07111288773496)
-                ]
-            }, {
-                name : '성북구',
-                path : [
-                    new daum.maps.LatLng(37.63654916557213, 126.98446028560235),
-                    new daum.maps.LatLng(37.631446839436855, 126.99372381657889),
-                    new daum.maps.LatLng(37.626192451322005, 126.99927047335905),
-                    new daum.maps.LatLng(37.62382095469671, 127.00488450145781),
-                    new daum.maps.LatLng(37.624026217174986, 127.00788862747375),
-                    new daum.maps.LatLng(37.6205124078061, 127.00724034082933),
-                    new daum.maps.LatLng(37.61679651952433, 127.01014412786792),
-                    new daum.maps.LatLng(37.61472018601129, 127.01451127202589),
-                    new daum.maps.LatLng(37.614629670135216, 127.01757841621624),
-                    new daum.maps.LatLng(37.61137091590441, 127.02219857751122),
-                    new daum.maps.LatLng(37.612692696824915, 127.02642583551054),
-                    new daum.maps.LatLng(37.612367438936786, 127.03018593770908),
-                    new daum.maps.LatLng(37.60896889076571, 127.0302525167858),
-                    new daum.maps.LatLng(37.61279787695882, 127.03730791358603),
-                    new daum.maps.LatLng(37.62426467261789, 127.04973339977498),
-                    new daum.maps.LatLng(37.61449950127667, 127.06174181124696),
-                    new daum.maps.LatLng(37.61561580859776, 127.06985247014711),
-                    new daum.maps.LatLng(37.61351359068103, 127.07170798866412),
-                    new daum.maps.LatLng(37.60762512162974, 127.07105453180604),
-                    new daum.maps.LatLng(37.605121767227374, 127.06219611364686),
-                    new daum.maps.LatLng(37.6010580545608, 127.05917142337097),
-                    new daum.maps.LatLng(37.60132672748398, 127.05508130598699),
-                    new daum.maps.LatLng(37.600149587503246, 127.05209540476308),
-                    new daum.maps.LatLng(37.60117358544485, 127.05101351973708),
-                    new daum.maps.LatLng(37.59617641777492, 127.04734129391157),
-                    new daum.maps.LatLng(37.59644879095525, 127.04184728392097),
-                    new daum.maps.LatLng(37.59126734230753, 127.03875553445558),
-                    new daum.maps.LatLng(37.5911852565689, 127.03621919708065),
-                    new daum.maps.LatLng(37.58894739851823, 127.03553876830637),
-                    new daum.maps.LatLng(37.58268174514337, 127.02953994610249),
-                    new daum.maps.LatLng(37.57782865303167, 127.02296295333255),
-                    new daum.maps.LatLng(37.57889204835333, 127.02179043639809),
-                    new daum.maps.LatLng(37.57758802896556, 127.01812215416163),
-                    new daum.maps.LatLng(37.581693162424465, 127.01673289259993),
-                    new daum.maps.LatLng(37.582338528091164, 127.01483104096094),
-                    new daum.maps.LatLng(37.58025588757531, 127.01058748333907),
-                    new daum.maps.LatLng(37.58047228501006, 127.00863575242668),
-                    new daum.maps.LatLng(37.58235007703611, 127.00677925856456),
-                    new daum.maps.LatLng(37.586091007146834, 127.00667090686603),
-                    new daum.maps.LatLng(37.58922302426079, 127.00228260552726),
-                    new daum.maps.LatLng(37.592300831997434, 127.0009511248032),
-                    new daum.maps.LatLng(37.59126960661375, 126.98919808879788),
-                    new daum.maps.LatLng(37.59447673441787, 126.98544283754865),
-                    new daum.maps.LatLng(37.59790270809407, 126.97672287261275),
-                    new daum.maps.LatLng(37.60099164566844, 126.97852019816328),
-                    new daum.maps.LatLng(37.60451393107786, 126.98678626394351),
-                    new daum.maps.LatLng(37.611364924201304, 126.98565700183143),
-                    new daum.maps.LatLng(37.613985109550605, 126.98658977758268),
-                    new daum.maps.LatLng(37.6177725051378, 126.9837302191854),
-                    new daum.maps.LatLng(37.6211493968146, 126.98365245774505),
-                    new daum.maps.LatLng(37.626378096236195, 126.97960492198952),
-                    new daum.maps.LatLng(37.6285585388996, 126.97992605309885),
-                    new daum.maps.LatLng(37.62980449548538, 126.97468284124939),
-                    new daum.maps.LatLng(37.633657663246694, 126.97740053878216),
-                    new daum.maps.LatLng(37.63476479485093, 126.98154674721893),
-                    new daum.maps.LatLng(37.63780700422825, 126.9849494717052),
-                    new daum.maps.LatLng(37.63654916557213, 126.98446028560235)
-                ]
-            }, {
-                name : '성동구',
-                path : [
-                    new daum.maps.LatLng(37.57275246810175, 127.04241813085706),
-                    new daum.maps.LatLng(37.57038253579033, 127.04794980454399),
-                    new daum.maps.LatLng(37.56231553903832, 127.05876047165025),
-                    new daum.maps.LatLng(37.5594131360664, 127.07373408220053),
-                    new daum.maps.LatLng(37.52832388381049, 127.05621773388143),
-                    new daum.maps.LatLng(37.53423885672233, 127.04604398310076),
-                    new daum.maps.LatLng(37.53582328355087, 127.03979942567628),
-                    new daum.maps.LatLng(37.53581367627865, 127.0211714455564),
-                    new daum.maps.LatLng(37.53378887274516, 127.01719284893274),
-                    new daum.maps.LatLng(37.537681185520256, 127.01726163044557),
-                    new daum.maps.LatLng(37.53938672166098, 127.00993448922989),
-                    new daum.maps.LatLng(37.54157804358092, 127.00879872996808),
-                    new daum.maps.LatLng(37.54502351209897, 127.00815187343248),
-                    new daum.maps.LatLng(37.547466935106435, 127.00931996404753),
-                    new daum.maps.LatLng(37.55264513061776, 127.01620129137214),
-                    new daum.maps.LatLng(37.556850715898484, 127.01807638779917),
-                    new daum.maps.LatLng(37.55779412537163, 127.0228934248264),
-                    new daum.maps.LatLng(37.5607276739534, 127.02339232029838),
-                    new daum.maps.LatLng(37.563390358462826, 127.02652159646888),
-                    new daum.maps.LatLng(37.56505173515675, 127.02678930885806),
-                    new daum.maps.LatLng(37.565200182350495, 127.02358387477513),
-                    new daum.maps.LatLng(37.57190723475508, 127.02337770475695),
-                    new daum.maps.LatLng(37.56978273516453, 127.03099733100001),
-                    new daum.maps.LatLng(37.57302061077518, 127.0381755492195),
-                    new daum.maps.LatLng(37.57275246810175, 127.04241813085706)
-                ]
-            }, {
-                name : '마포구',
-                path : [
-                    new daum.maps.LatLng(37.584651324803644, 126.88883849288884),
-                    new daum.maps.LatLng(37.57082994377989, 126.9098094620638),
-                    new daum.maps.LatLng(37.56510367293256, 126.92601582346325),
-                    new daum.maps.LatLng(37.5633319104926, 126.92828128083327),
-                    new daum.maps.LatLng(37.55884751347576, 126.92659242918415),
-                    new daum.maps.LatLng(37.55675317809392, 126.93190919632814),
-                    new daum.maps.LatLng(37.555098093384, 126.93685861757348),
-                    new daum.maps.LatLng(37.55654562007193, 126.9413708153468),
-                    new daum.maps.LatLng(37.557241466445234, 126.95913438471307),
-                    new daum.maps.LatLng(37.55908394430372, 126.96163689468189),
-                    new daum.maps.LatLng(37.55820141918588, 126.96305432966605),
-                    new daum.maps.LatLng(37.554784413504734, 126.9617251098019),
-                    new daum.maps.LatLng(37.548791603525764, 126.96371984820232),
-                    new daum.maps.LatLng(37.54546318600178, 126.95790512689311),
-                    new daum.maps.LatLng(37.54231338779177, 126.95817394011969),
-                    new daum.maps.LatLng(37.539468942052544, 126.955731506394),
-                    new daum.maps.LatLng(37.536292068277106, 126.95128907260018),
-                    new daum.maps.LatLng(37.53569162926515, 126.94627494388307),
-                    new daum.maps.LatLng(37.53377712226906, 126.94458373402794),
-                    new daum.maps.LatLng(37.54135238063506, 126.93031191951576),
-                    new daum.maps.LatLng(37.539036674424615, 126.9271006565075),
-                    new daum.maps.LatLng(37.54143034750605, 126.9224138272872),
-                    new daum.maps.LatLng(37.54141748538761, 126.90483000187002),
-                    new daum.maps.LatLng(37.548015078285694, 126.89890097452322),
-                    new daum.maps.LatLng(37.56300401736817, 126.86623824787709),
-                    new daum.maps.LatLng(37.57178997971358, 126.85363039091744),
-                    new daum.maps.LatLng(37.57379738998644, 126.85362646212587),
-                    new daum.maps.LatLng(37.57747251471329, 126.864939928088),
-                    new daum.maps.LatLng(37.5781913017327, 126.87625939970273),
-                    new daum.maps.LatLng(37.57977132158497, 126.87767870371688),
-                    new daum.maps.LatLng(37.584440882833654, 126.87653889183002),
-                    new daum.maps.LatLng(37.59079311146897, 126.88205386700724),
-                    new daum.maps.LatLng(37.584651324803644, 126.88883849288884)
-                ]
-            }
 
-     	]
-	
-	
-	
+function getData(){
+    var arrayDong=[];
+    $.getJSON('alley.json', function(data) {
+       $.each(data, function(i, area) {
+          arrayDong.push(area);
+       });  
+       var areas=getPath(arrayDong)
+       for (var i = 0, len = areas.length; i < len; i++) {
+            displayArea(areas[i]);
+        }     
+    }); 
 
-//다각형을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 다각형을 표시합니다 
-/* var polygonPath = [
-        new daum.maps.LatLng(37.560690, 126.982077),
-        new daum.maps.LatLng(37.561927, 126.981374),
-        new daum.maps.LatLng(37.564380, 126.982454),
-        new daum.maps.LatLng(37.564439, 126.984285),
-        new daum.maps.LatLng(37.563690, 126.984439),
-        new daum.maps.LatLng(37.564549, 126.987458),
-        new daum.maps.LatLng(37.562907, 126.988504),
-        new daum.maps.LatLng(37.561272, 126.988762)
-]; */
+ }
 
-//지도에 영역데이터를 폴리곤으로 표시합니다 
-for (var i = 0, len = areas.length; i < len; i++) {
-    displayArea(areas[i]);
-}
+
+ function getPath(data){
+    var area=[]
+    for(var i=0; i<data.length; i++){
+       var dong={}
+       name=data[i]["name"];
+       path=data[i]["path"];
+       var posList=[]
+       for(var j=0; j<path.length; j++){        
+          pos=new daum.maps.LatLng(path[j][1], path[j][0])
+          posList.push(pos)
+       }
+       dong["name"]=name
+       dong["path"]=posList
+       area.push(dong)   
+    }
+
+    return area
+ }
+ 
+getData();
+
+
+
+
 
 
 //다각형을 생상하고 이벤트를 등록하는 함수입니다
@@ -568,12 +261,12 @@ function displayArea(area) {
 var polygon = new daum.maps.Polygon({
 	map: map,
     path: area.path, // 그려질 다각형의 좌표 배열입니다
-    strokeWeight: 3, // 선의 두께입니다
-    strokeColor: '#ef0404', // 선의 색깔입니다
-    strokeOpacity: 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+    strokeWeight: 2, // 선의 두께입니다
+    strokeColor: '#ffae23', // 선의 색깔입니다
+    strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
     strokeStyle: 'solid', // 선의 스타일입니다
-    fillColor: '#EFFFED', // 채우기 색깔입니다
-    fillOpacity: 0.3 // 채우기 불투명도 입니다
+   /*  fillColor: '#EFFFED', // 채우기 색깔입니다
+    fillOpacity: 0.3 // 채우기 불투명도 입니다 */
 });
 
 
@@ -604,10 +297,6 @@ daum.maps.event.addListener(polygon, 'mouseout', function() {
     polygon.setOptions(mouseoutOption);
     
 }); 
-
-//=============================================================================================================
-//=============================================================================================================
-
 
 //다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
 daum.maps.event.addListener(polygon, 'click', function(mouseEvent) {
@@ -817,10 +506,34 @@ function changeCategoryClass(el) {
 
 function cityChange(){
 	 
-	var 강남 = ["압구정동","삼성동","청담동"];
-	var 강동 = ["상일동","명일동","천호동"];
-	var 강북 = ["수유동","우이동","삼양동"];
-	 
+	var 강남 = ["개포동", "논현동", "대치동", "도곡동", "삼성동", "압구정동", "역삼동", "일원동", "청담동"];
+	var 강동 = ["강일동", "고덕동", "길동", "둔촌동", "명일동", "상일동", "성내동", "암사동", "천호동"];
+	var 강북 = ["미아동", "번동", "삼양동", "송중동", "송천동", "수유동"];
+	var 강서 = ["가양동", "공항동", "등촌동", "발산동", "방화동", "염창동", "우장산동", "화곡동"];
+	var 관악 = ["낙성대동", "난곡동", "남현동", "대학동", "미성동", "보라매동", "서림동", "신림동", "신사동", "신원동", "은천동", "인헌동", "조원동", "조원동", "중앙동", "청룡동", "행운동"];
+	var 광진 = ["광장동", "구의동", "군자동", "능동", "자양동", "중곡동", "화양동"];
+	var 구로 = ["가리봉동", "개봉동", "고척동", "구로동", "수궁동", "신도림동", "오류동"];
+	var 금천 = ["가산동", "독산동", "시흥동"];
+	var 노원 = ["공릉동", "상계동", "월계동", "중계동"];
+	var 도봉 = ["도봉동", "방학동", "쌍문동", "창동"];
+	var 동대문 = ["답십리동", "용신동", "이문동", "장안동", "전농동", "제기동", "청량리동", "회기동", "휘경동"];
+	var 동작구 = ["노량진동", "대방동", "사당동", "상도동", "신대방동", "흑석동"];
+	var 마포구 = ["공덕동", "대흥동", "도화동", "망원동", "상암동", "서교동", "성산동", "신수동", "아현동", "연남동", "염리동", "합정동"];
+	var 서대문 = ["남가좌동", "북가좌동", "신촌동", "연희동", "천연동", "홍은동", "홍제동"];
+	var 서초 = ["반포동", "방배동", "서초동", "양재동", "잠원동"];
+	var 성동 = ["금호동", "마장동", "사근동", "성수동", "옥수동", "왕십리동", "용답동", "행당동"];
+	var 성북 = ["길음동", "동선동", "보문동", "삼선동", "석관동", "성북동", "안암동", "월곡동", "장위동", "정릉동", "종암동"];
+	var 송파 = ["가락동", "거여동", "마천동", "문정동", "방이동", "삼전동", "석촌동", "송파동", "오금동", "잠실동", "장지동", "풍납동"];
+	var 양천 = ["목동", "신월동", "신정동"];
+	var 영등포 = ["당산동", "대림동", "문래동", "신길동", "양평동", "영등포동"];
+	var 용산 = ["남영동", "용문동", "원효로동", "이촌동", "이태원동", "청파동", "한강로동", "한남동", "후암동"];
+	var 은평 = ["갈현동", "대조동", "불광동", "수색동", "신사동", "응암동", "증산동"];
+	var 종로 = ["가회동", "사직동", "삼청동", "숭인동", "이화동", "종로5.6가동", "창신동", "청운효자동", "평창동"];
+	var 중 = ["다산동", "동화동", "명동", "신당동", "약수동", "중림동", "청구동", "황학동", "회현동"];
+	var 중랑 = ["망우본동", "면목동", "묵동", "상봉동", "신내동", "중화동"];
+		
+		
+		
 	var selectCity = $("#select1").val();
 	 
 	var changeCity;
@@ -834,6 +547,72 @@ function cityChange(){
 	else if(selectCity == "강북구"){
 	  changeCity =  강북;
 	}
+	else if(selectCity == "강서구"){
+		  changeCity = 강서;
+	}
+	else if(selectCity == "관악구"){
+		  changeCity =  관악;
+	}
+	else if(selectCity == "광진구"){
+		  changeCity =  광진;
+	}
+	else if(selectCity == "구로구"){
+		  changeCity =  구로;
+	}
+	else if(selectCity == "금천구"){
+		  changeCity =  금천;
+	}
+	else if(selectCity == "노원구"){
+		  changeCity =  노원;
+	}
+	else if(selectCity == "도봉구"){
+		  changeCity =  도봉;
+	}
+	else if(selectCity == "동대문구"){
+		  changeCity =  동대문;
+	}
+	else if(selectCity == "동작구"){
+		  changeCity =  동작구;
+	}
+	else if(selectCity == "마포구"){
+		  changeCity =  마포구;
+	}
+	else if(selectCity == "서대문구"){
+		  changeCity =  서대문;
+	}
+	else if(selectCity == "서초구"){
+		  changeCity =  서초;
+	}
+	else if(selectCity == "성동구"){
+		  changeCity =  성동;
+	}
+	else if(selectCity == "성북구"){
+		  changeCity =  성북;
+	}
+	else if(selectCity == "송파구"){
+		  changeCity =  송파;
+	}
+	else if(selectCity == "양천구"){
+		  changeCity =  양천;
+	}
+	else if(selectCity == "영등포구"){
+		  changeCity =  영등포;
+	}
+	else if(selectCity == "용산구"){
+		  changeCity =  용산;
+	}
+	else if(selectCity == "은평구"){
+		  changeCity =  은평;
+	}
+	else if(selectCity == "종로구"){
+		  changeCity =  종로;
+	}
+	else if(selectCity == "중구"){
+		  changeCity =  중;
+	}
+	else if(selectCity == "중랑구"){
+		  changeCity =  중랑;
+	}
 	 
 	$('#select2').empty();
 	 
@@ -844,6 +623,56 @@ function cityChange(){
 	}
 
 }
+
+/* var checkFrm = function() {
+	//console.log(document.frm.s.options.length); -옵션의 갯수 나옴
+	//console.log(document.frm.s.options.selectedIndex); 
+	//-선택된 옵션의 위치값
+	var index1 = document.dong.g.options.selectedIndex;
+	var index2 = document.dong.d.options.selectedIndex;
+	console.log(document.dong.g.options[index1].text);
+	console.log(document.dong.d.options[index2].text);
+	};
+ */
+function mapSearch2() {
+	
+	var index1 = document.dong.g.options.selectedIndex;
+	var index2 = document.dong.d.options.selectedIndex;
+	var myAddress = document.dong.g.options[index1].text + " " + document.dong.d.options[index2].text
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new daum.maps.services.Geocoder();
+
+	// 주소로 좌표를 검색합니다
+		geocoder.addressSearch(myAddress, function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === daum.maps.services.Status.OK) {
+
+	        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new daum.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new daum.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">여기요 여기</div>'
+	        });
+	        infowindow.open(map, marker);
+
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});    
+	
+}
+
+//=============================================================================================================
+//=============================================================================================================
+
 
 function foodChange(){
 	 
