@@ -212,49 +212,6 @@ function mapSearch() {
 //=============================================================================================================
 
 
-//다각형을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 다각형을 표시합니다 
-var polygonPath = [
-        new daum.maps.LatLng(37.560690, 126.982077),
-        new daum.maps.LatLng(37.561927, 126.981374),
-        new daum.maps.LatLng(37.564380, 126.982454),
-        new daum.maps.LatLng(37.564439, 126.984285),
-        new daum.maps.LatLng(37.563690, 126.984439),
-        new daum.maps.LatLng(37.564549, 126.987458),
-        new daum.maps.LatLng(37.562907, 126.988504),
-        new daum.maps.LatLng(37.561272, 126.988762)
-];
-
-var polygonPath2 = [
-    new daum.maps.LatLng(37.558339, 126.925464),
-    new daum.maps.LatLng(37.557874, 126.924740),
-    new daum.maps.LatLng(37.558557, 126.923479),
-    new daum.maps.LatLng(37.556093, 126.920696),
-    new daum.maps.LatLng(37.558507, 126.918038),
-    new daum.maps.LatLng(37.561614, 126.918674),
-    new daum.maps.LatLng(37.564786, 126.924192),
-    new daum.maps.LatLng(37.565435, 126.923573),
-    new daum.maps.LatLng(37.565767, 126.923693),
-    new daum.maps.LatLng(37.565277, 126.925190),
-    new daum.maps.LatLng(37.563150, 126.928092),
-    new daum.maps.LatLng(37.560895, 126.926719),
-    new daum.maps.LatLng(37.558887, 126.926357)
-];
-
-
-// 지도에 표시할 다각형을 생성합니다
-var polygon = new daum.maps.Polygon({
-    path:polygonPath, // 그려질 다각형의 좌표 배열입니다
-    path:polygonPath2,
-    strokeWeight: 3, // 선의 두께입니다
-    strokeColor: '#EFFFED', // 선의 색깔입니다
-    strokeOpacity: 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-    strokeStyle: 'solid', // 선의 스타일입니다
-    fillColor: '#EFFFED', // 채우기 색깔입니다
-    fillOpacity: 0.3 // 채우기 불투명도 입니다
-});
-
-// 지도에 다각형을 표시합니다
-polygon.setMap(map);
 //#A2FF99
 // 다각형에 마우스오버 이벤트가 발생했을 때 변경할 채우기 옵션입니다
 var mouseoverOption = { 
@@ -552,6 +509,52 @@ function foodChange(){
 	}
 
 }
+
+
+
+//데이터를 가져오기 위해 jQuery를 사용합니다
+// 데이터를 가져와 마커를 생성하고 클러스터러 객체에 넘겨줍니다
+$.get("/mapTest.json", function(data) {
+        var polygonPath = $(data.positions).map(function(i, position) {
+            return new daum.maps.LatLng(position.lat, position.lng);
+        });
+
+    /* $.get("/dongGps.json", function(data) {
+        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
+        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+        var markers = $(data.positions).map(function(i, position) {
+            return new daum.maps.Marker({
+                position : new daum.maps.LatLng(position.lat, position.lng)
+            });
+        }); */
+    
+    
+    
+        /* var polygonPath = [
+            new daum.maps.LatLng(37.560690, 126.982077),
+            new daum.maps.LatLng(37.561927, 126.981374),
+            new daum.maps.LatLng(37.564380, 126.982454),
+            new daum.maps.LatLng(37.564439, 126.984285),
+            new daum.maps.LatLng(37.563690, 126.984439),
+            new daum.maps.LatLng(37.564549, 126.987458),
+            new daum.maps.LatLng(37.562907, 126.988504),
+            new daum.maps.LatLng(37.561272, 126.988762)
+    ]; */
+
+
+    // 지도에 표시할 다각형을 생성합니다
+    var polygon = new daum.maps.Polygon({
+        path:polygonPath, // 그려질 다각형의 좌표 배열입니다
+        strokeWeight: 3, // 선의 두께입니다
+        strokeColor: '#EFFFED', // 선의 색깔입니다
+        strokeOpacity: 0.5, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+        strokeStyle: 'solid', // 선의 스타일입니다
+        fillColor: '#EFFFED', // 채우기 색깔입니다
+        fillOpacity: 0.3 // 채우기 불투명도 입니다
+    });
+
+    // 지도에 다각형을 표시합니다
+    polygon.setMap(map);
 
 </script>
 </body>
