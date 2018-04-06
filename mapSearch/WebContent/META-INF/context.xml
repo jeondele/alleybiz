@@ -22,8 +22,8 @@
 					type="javax.sql.DataSource"
 					driverClassName="org.mariadb.jdbc.Driver"
 					url="jdbc:mariadb://10.1.41.102:3306/el"
-					username="el"
-					password="password"
+					username="root"
+					password="el"
 					loginTimeout="10"
 					maxWait="5000" 
 					testOnBorrow="true" />

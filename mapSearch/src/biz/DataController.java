@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import bean.AlleyDataBean;
 import bean.ResultBean;
 import model.DataDAO;
+import model.GetOne;
 
 @WebServlet("/data")
 public class DataController extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
 
 	public DataController() {
 	}
@@ -27,26 +27,36 @@ public class DataController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 
-		String dong = request.getParameter("dong");
+		String dong = request.getParameter("d");
 		String areaCode = request.getParameter("area");
 		String serviceCode = request.getParameter("service");
 
 		try {
-			AlleyDataBean alley = DataDAO.selectArea(areaCode, serviceCode);
-			ResultBean alleyResult=DataDAO.selectResult(areaCode, serviceCode);
-			ArrayList<AlleyDataBean> surArea = DataDAO.selectSurArea(dong, areaCode);
-			ArrayList<ResultBean> surResult= DataDAO.selectSurResult(dong, areaCode);
-			
 
+			ArrayList<AlleyDataBean> area = DataDAO.selectArea(areaCode);		
+			AlleyDataBean alley = GetOne.getAreaService(area, areaCode);
+
+			//ArrayList<AlleyDataBean> surArea = DataDAO.selectSurArea(dong, areaCode);
+			//AlleyDataBean surAlley = GetOne.getAreaService(surArea, areaCode);
+
+//			ArrayList<ResultBean> result = DataDAO.selectResult(areaCode);
+//			ResultBean resultAlley = GetOne.getResultAreaService(result, areaCode, serviceCode);
+//
+//			ArrayList<ResultBean> surResult = DataDAO.selectSurResult(dong, areaCode);
+//			ResultBean surResultAlley = GetOne.getResultAreaService(surResult, areaCode, serviceCode);
 
 			// ArrayList<ResultBean> surResult = selectSurArea(areaList, serviceCode);
 
+			request.getSession().setAttribute("area", area);
 			request.getSession().setAttribute("alley", alley);
-			request.getSession().setAttribute("surArea", surArea);
-			request.getSession().setAttribute("alleyResult", alleyResult);
-			request.getSession().setAttribute("surResult", surResult);
+			//request.getSession().setAttribute("surArea", surArea);
+			//request.getSession().setAttribute("surAlley", surAlley);
+//			request.getSession().setAttribute("result", result);
+//			request.getSession().setAttribute("resultAlley", resultAlley);
+//			request.getSession().setAttribute("surResult", surResult);
+//			request.getSession().setAttribute("surResultAlley", surResultAlley);
 
-			response.sendRedirect("service.jsp");
+			response.sendRedirect("result.jsp");
 
 		} catch (SQLException e) {
 			e.printStackTrace();

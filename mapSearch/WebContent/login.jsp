@@ -48,7 +48,7 @@
 <body>
 	<div class="container">
 		<div class="login">
-			<form action="login" method="post">
+			<form action="Login" method="post">
 				<input type="text" id="login-id" class="login-form" name="id" placeholder=" ID" required><br><br>
 				<input type="password" id="login-pw" class="login-form" name="pw" placeholder=" Password" required><br><br>
 				<input type="submit" class="login-form button" value="ENTER">

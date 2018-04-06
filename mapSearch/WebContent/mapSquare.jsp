@@ -79,7 +79,7 @@
  			<button onclick="mapSearch()">위치 검색</button>
  			<hr color="black" style="width:500px" align="left">
  			
- 			<form name="dong">
+ 			<form name="dong" action="data">
  			<select id="select1" name="g" onchange="cityChange()" style="width:250px; height:35px">
  				<option label="자치구 를 선택하여 주십시오"></option>
 				<option>강남구</option>
@@ -112,25 +112,29 @@
 			<select id="select2" name="d" style="width:250px; height:35px">
 			</select>
 			<input type="button" value="동 검색" onclick="mapSearch2()">
-			</form>
+			
 
  			<hr color="black" style="width:500px" align="left">
  			
  			
-             <select id="select3" onchange="foodChange()" style="width:250px; height:35px">
+             <select id="select3" name="service" onchange="foodChange()" style="width:250px; height:35px">
  				<option label="업종 을 선택하여 주십시오"></option>
 				<option>한 식</option>
 				<option>중 식</option>
 				<option>일 식</option>
+				<option>양 식</option>
+				<option>카페</option>
+				<option>베이커리</option>
+				<option>호프</option>				
 			</select>
 				 
 			<select id="select4" style="width:250px; height:35px">
 			</select>
              <hr color="black" style="width:500px" align="left">        
-        
-             <input type="submit" value="분석" onclick=>
+        	
+             <input type="submit" value="분석" >
              <input type="text" placeholder="동일 업종" style="width:500px; height:35px">
-             
+             </form>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55d81c6e682f667cceb61a2a681598bf&libraries=services"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
