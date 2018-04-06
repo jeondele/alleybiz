@@ -126,8 +126,9 @@
 				 
 			<select id="select4" style="width:250px; height:35px">
 			</select>
-             <hr color="black" style="width:500px" align="left">             
-             
+             <hr color="black" style="width:500px" align="left">        
+        
+             <input type="submit" value="분석" onclick=>
              <input type="text" placeholder="동일 업종" style="width:500px; height:35px">
              
 

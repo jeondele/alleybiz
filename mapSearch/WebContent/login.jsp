@@ -22,6 +22,7 @@
 	.login-form {
 		width: 30%;
 		height: 30px;
+		
 	    box-shadow: 2px 2px 6px grey;
 	}
 	.login-form:hover {
@@ -35,6 +36,7 @@
 	}
 	#error {
 		color: #f59b5a;
+		
 		width: 40%;
 		height: 20%;
 		margin-left: 30%;

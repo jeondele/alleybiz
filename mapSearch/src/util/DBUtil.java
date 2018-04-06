@@ -18,7 +18,7 @@ public class DBUtil {
 		try {
 			Context initContext = new InitialContext();		
 			Context envContext = (Context)initContext.lookup("java:/comp/env");
-			source = (DataSource)envContext.lookup("jdbc/myoracle");
+			source = (DataSource)envContext.lookup("jdbc/mariadb");
 			resource = ResourceBundle.getBundle("conf/sql");
 		} catch (Exception e) {
 			e.printStackTrace();

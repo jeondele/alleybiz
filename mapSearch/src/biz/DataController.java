@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.DataBean;
+import bean.AlleyDataBean;
 import bean.ResultBean;
 import model.DataDAO;
 
 @WebServlet("/data")
 public class DataController extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+
 	public DataController() {
 	}
 
@@ -24,13 +27,25 @@ public class DataController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 
+		String dong = request.getParameter("dong");
 		String areaCode = request.getParameter("area");
 		String serviceCode = request.getParameter("service");
+
 		try {
-			ResultBean result = DataDAO.selectResultData(areaCode, serviceCode);
-			ArrayList<DataBean> data = DataDAO.selectData(areaCode, serviceCode);
-			request.getSession().setAttribute("result", result);
-			request.getSession().setAttribute("data", data);
+			AlleyDataBean alley = DataDAO.selectArea(areaCode, serviceCode);
+			ResultBean alleyResult=DataDAO.selectResult(areaCode, serviceCode);
+			ArrayList<AlleyDataBean> surArea = DataDAO.selectSurArea(dong, areaCode);
+			ArrayList<ResultBean> surResult= DataDAO.selectSurResult(dong, areaCode);
+			
+
+
+			// ArrayList<ResultBean> surResult = selectSurArea(areaList, serviceCode);
+
+			request.getSession().setAttribute("alley", alley);
+			request.getSession().setAttribute("surArea", surArea);
+			request.getSession().setAttribute("alleyResult", alleyResult);
+			request.getSession().setAttribute("surResult", surResult);
+
 			response.sendRedirect("service.jsp");
 
 		} catch (SQLException e) {

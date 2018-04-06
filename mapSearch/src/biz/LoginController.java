@@ -26,13 +26,15 @@ public class LoginController extends HttpServlet {
 				if (user.getPw().equals(inputPw)) {// 패스워드 검증
 					request.getSession().setAttribute("user", user); 
 					response.sendRedirect("service.jsp");
+
 				} else { // 패스워드 불일치
 					request.getSession().setAttribute("user", "block");
-					response.sendRedirect("input.jsp");
+					response.sendRedirect("login.jsp");
+
 				}
 			}
 		} catch (Exception e) {
-			response.sendRedirect("input.jsp");
+			response.sendRedirect("login.jsp");
 		}
 	}
 }

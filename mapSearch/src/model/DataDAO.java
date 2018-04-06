@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import bean.DataBean;
+import bean.AlleyDataBean;
 import bean.ResultBean;
 import util.DBUtil;
 
@@ -18,27 +18,42 @@ public class DataDAO {
 		sql = DBUtil.getResourceBundle();
 	}
 
-	public static ArrayList<DataBean> selectAllData() throws SQLException {
+	public static ArrayList<AlleyDataBean> selectSurArea(String dong, String areaCode) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<DataBean> all = null;
+		ArrayList<AlleyDataBean> all = null;
 
 		try {
 			conn = DBUtil.getConnection();
-			pstmt = conn.prepareStatement(sql.getString("selectAllData"));
+			pstmt = conn.prepareStatement(sql.getString("selectSurArea"));
+			pstmt.setString(1, dong);
+			pstmt.setString(2, areaCode);
 			rset = pstmt.executeQuery();
-			all = new ArrayList<DataBean>();
+			all = new ArrayList<AlleyDataBean>();
 
 			while (rset.next()) {
-				DataBean user = new DataBean();
-				user.setDate(rset.getString(1));
-				user.setAreaCode(rset.getString(2));
-				user.setServiceCode(rset.getString(3));
-				user.setServiceCode(rset.getString(4));
-				user.setSales(rset.getInt(5));
-				user.setStores(rset.getInt(6));
-				all.add(user);
+				AlleyDataBean alley = new AlleyDataBean();
+				alley.setAreaCode(rset.getString(1));
+				alley.setServiceCode(rset.getString(2));
+				alley.setTotalNearStore(rset.getFloat(3));
+				alley.setTotalStore(rset.getFloat(4));
+				alley.setAvgNearMonth(rset.getFloat(5));
+				alley.setNearSales(rset.getFloat(6));
+				alley.setNumberOfNearSales(rset.getFloat(8));
+				alley.setAvgMonth(rset.getFloat(9));
+				alley.setNumberOfSales(rset.getFloat(10));
+				alley.setTotalPeople(rset.getFloat(11));
+				alley.setTotalNearPeople(rset.getFloat(12));
+				alley.setTotalBizman(rset.getFloat(13));
+				alley.setTotalNearBizman(rset.getFloat(14));
+				alley.setTotalLivingPeople(rset.getFloat(15));
+				alley.setAvgIncome(rset.getFloat(16));
+				alley.setAvgOutcome(rset.getFloat(17));
+				alley.setAvgNearOutcome(rset.getFloat(18));
+				alley.setTotalFacility(rset.getFloat(19));
+				alley.setTotalNearFacility(rset.getFloat(20));
+				all.add(alley);
 			}
 			if (all.size() != 0) {
 				return all;
@@ -50,125 +65,102 @@ public class DataDAO {
 		}
 	}
 
-	public static ArrayList<DataBean> selectAreaCode(String areaCode) throws SQLException {
+	public static AlleyDataBean selectArea(String areaCode, String serviceCode) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<DataBean> all = null;
+
 		try {
 			conn = DBUtil.getConnection();
-			pstmt = conn.prepareStatement(sql.getString("selectAreaCode"));
-			pstmt.setString(1, areaCode);
-			rset = pstmt.executeQuery();
-			all = new ArrayList<DataBean>();
-
-			while (rset.next()) {
-				DataBean user = new DataBean();
-				user.setDate(rset.getString(1));
-				user.setAreaCode(rset.getString(2));
-				user.setServiceCode(rset.getString(3));
-				user.setServiceCode(rset.getString(4));
-				user.setSales(rset.getInt(5));
-				user.setStores(rset.getInt(6));
-				all.add(user);
-
-			}
-			if (all.size() != 0) {
-				return all;
-			} else {
-				return null;
-			}
-		} finally {
-			DBUtil.close(conn, pstmt, rset);
-		}
-	}
-
-	public static ArrayList<DataBean> selectServiceCodeData(String serviceCode) throws SQLException {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<DataBean> all = null;
-		try {
-			conn = DBUtil.getConnection();
-			pstmt = conn.prepareStatement(sql.getString("selectServiceCode"));
-			pstmt.setString(1, serviceCode);
-			rset = pstmt.executeQuery();
-			all = new ArrayList<DataBean>();
-
-			while (rset.next()) {
-				DataBean user = new DataBean();
-				user.setDate(rset.getString(1));
-				user.setAreaCode(rset.getString(2));
-				user.setServiceCode(rset.getString(3));
-				user.setServiceCode(rset.getString(4));
-				user.setSales(rset.getInt(5));
-				user.setStores(rset.getInt(6));
-				all.add(user);
-
-			}
-			if (all.size() != 0) {
-				return all;
-			} else {
-				return null;
-			}
-		} finally {
-			DBUtil.close(conn, pstmt, rset);
-		}
-	}
-
-	public static ArrayList<DataBean> selectData(String areaCode, String serviceCode) throws SQLException {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		ArrayList<DataBean> all = null;
-		try {
-			conn = DBUtil.getConnection();
-			pstmt = conn.prepareStatement(sql.getString("selectData"));
+			pstmt = conn.prepareStatement(sql.getString("selectArea"));
 			pstmt.setString(1, areaCode);
 			pstmt.setString(2, serviceCode);
+
 			rset = pstmt.executeQuery();
-			all = new ArrayList<DataBean>();
 
-			if (rset.next()) {
-				DataBean user = new DataBean();
-				user.setDate(rset.getString(1));
-				user.setAreaCode(rset.getString(2));
-				user.setServiceCode(rset.getString(3));
-				user.setServiceCode(rset.getString(4));
-				user.setSales(rset.getInt(5));
-				user.setStores(rset.getInt(6));
-				all.add(user);
-
+			while (rset.next()) {
+				AlleyDataBean alley = new AlleyDataBean();
+				alley.setAreaCode(rset.getString(1));
+				alley.setServiceCode(rset.getString(2));
+				alley.setTotalNearStore(rset.getFloat(3));
+				alley.setTotalStore(rset.getFloat(4));
+				alley.setAvgNearMonth(rset.getFloat(5));
+				alley.setNearSales(rset.getFloat(6));
+				alley.setNumberOfNearSales(rset.getFloat(8));
+				alley.setAvgMonth(rset.getFloat(9));
+				alley.setNumberOfSales(rset.getFloat(10));
+				alley.setTotalPeople(rset.getFloat(11));
+				alley.setTotalNearPeople(rset.getFloat(12));
+				alley.setTotalBizman(rset.getFloat(13));
+				alley.setTotalNearBizman(rset.getFloat(14));
+				alley.setTotalLivingPeople(rset.getFloat(15));
+				alley.setAvgIncome(rset.getFloat(16));
+				alley.setAvgOutcome(rset.getFloat(17));
+				alley.setAvgNearOutcome(rset.getFloat(18));
+				alley.setTotalFacility(rset.getFloat(19));
+				alley.setTotalNearFacility(rset.getFloat(20));
+				return alley;
 			}
-			if (all.size() != 0) {
-				return all;
-			} else {
-				return null;
-			}
+			return null;
 		} finally {
 			DBUtil.close(conn, pstmt, rset);
 		}
 	}
 
-	public static ResultBean selectResultData(String areaCode, String serviceCode) throws SQLException {
+	public static ArrayList<ResultBean> selectSurResult(String dong, String areaCode) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		ArrayList<ResultBean> all = null;
 
 		try {
 			conn = DBUtil.getConnection();
-			pstmt = conn.prepareStatement(sql.getString("selectResultData"));
-			pstmt.setString(1, areaCode);
-			pstmt.setString(2, serviceCode);
+			pstmt = conn.prepareStatement(sql.getString("selectSurResult"));
+			pstmt.setString(1, dong);
+			pstmt.setString(2, areaCode);
 			rset = pstmt.executeQuery();
+			all = new ArrayList<ResultBean>();
 
-			if (rset.next()) {
+			while (rset.next()) {
 				ResultBean result = new ResultBean();
 				result.setAreaCode(rset.getString(1));
 				result.setServiceCode(rset.getString(2));
-				result.setServiceCode(rset.getString(3));
-				result.setEstimatedSales(rset.getInt(4));
-				result.setEstimatedGroup(rset.getString(5));
+				result.setGu(rset.getString(3));
+				result.setDong(rset.getString(4));
+				result.setEstimatedSales(rset.getFloat(5));
+				result.setEstimatedGroup(rset.getString(6));
+				all.add(result);
+			}
+			if (all.size() != 0) {
+				return all;
+			} else {
+				return null;
+			}
+		} finally {
+			DBUtil.close(conn, pstmt, rset);
+		}
+	}
+
+	public static ResultBean selectResult(String areaCode, String serviceCode) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql.getString("selectResult"));
+			pstmt.setString(1, areaCode);
+			pstmt.setString(2, serviceCode);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				ResultBean result = new ResultBean();
+				result.setAreaCode(rset.getString(1));
+				result.setServiceCode(rset.getString(2));
+				result.setGu(rset.getString(3));
+				result.setDong(rset.getString(4));
+				result.setEstimatedSales(rset.getFloat(5));
+				result.setEstimatedGroup(rset.getString(6));
 				return result;
 			}
 			return null;
