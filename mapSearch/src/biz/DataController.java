@@ -27,8 +27,10 @@ public class DataController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 
-		String dong = request.getParameter("d");
-		System.out.println(dong);
+		String g = request.getParameter("g");
+		String d = request.getParameter("d");
+		System.out.println(g);
+		System.out.println(d);
 		//String areaCode = request.getParameter("area");
 		String serviceCode = request.getParameter("service");
 		String areaCode="12322";
@@ -48,8 +50,9 @@ public class DataController extends HttpServlet {
 //			ResultBean surResultAlley = GetOne.getResultAreaService(surResult, areaCode, serviceCode);
 
 			// ArrayList<ResultBean> surResult = selectSurArea(areaList, serviceCode);
-
-			request.getSession().setAttribute("area", area);
+			
+			request.getSession().setAttribute("g", g);
+			request.getSession().setAttribute("d", d);
 			//request.getSession().setAttribute("alley", alley);
 			//request.getSession().setAttribute("surArea", surArea);
 			//request.getSession().setAttribute("surAlley", surAlley);
@@ -58,7 +61,7 @@ public class DataController extends HttpServlet {
 //			request.getSession().setAttribute("surResult", surResult);
 //			request.getSession().setAttribute("surResultAlley", surResultAlley);
 
-			response.sendRedirect("result.jsp");
+			response.sendRedirect("mapAnalysis.jsp");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
