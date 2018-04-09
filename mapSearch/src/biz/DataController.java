@@ -31,15 +31,14 @@ public class DataController extends HttpServlet {
 		// String areaCode = request.getParameter("area");
 		String service = request.getParameter("service");
 
-		String areaCode = "12322";
+		String areaCode = "11947.0";
 
 		if (dong == null) {
-			request.getSession().setAttribute("area", "block");
+			request.getSession().setAttribute("areaCheck", "block");
 			response.sendRedirect("mapService.jsp");
 		} else if (service == null) {
-			request.getSession().setAttribute("service", "block");
+			request.getSession().setAttribute("serviceCheck", "block");
 			response.sendRedirect("mapService.jsp");
-
 
 		} else {
 			response.sendRedirect("result.jsp");
@@ -47,6 +46,7 @@ public class DataController extends HttpServlet {
 			try {
 
 				ArrayList<AlleyDataBean> area = DataDAO.selectArea(areaCode);
+				request.getSession().setAttribute("area", area);
 				// AlleyDataBean alley = GetOne.getAreaService(area, areaCode);
 
 				// ArrayList<AlleyDataBean> surArea = DataDAO.selectSurArea(dong, areaCode);
@@ -62,25 +62,7 @@ public class DataController extends HttpServlet {
 
 				// ArrayList<ResultBean> surResult = selectSurArea(areaList, serviceCode);
 
-				request.getSession().setAttribute("area", area);
-				// request.getSession().setAttribute("alley", alley);
-				// request.getSession().setAttribute("surArea", surArea);
-				// request.getSession().setAttribute("surAlley", surAlley);
-				// request.getSession().setAttribute("result", result);
-				// request.getSession().setAttribute("resultAlley", resultAlley);
-				// request.getSession().setAttribute("surResult", surResult);
-				// request.getSession().setAttribute("surResultAlley", surResultAlley);
 
-				response.sendRedirect("result.jsp");
-			
-
-			//request.getSession().setAttribute("alley", alley);
-			//request.getSession().setAttribute("surArea", surArea);
-			//request.getSession().setAttribute("surAlley", surAlley);
-//			request.getSession().setAttribute("result", result);
-//			request.getSession().setAttribute("resultAlley", resultAlley);
-//			request.getSession().setAttribute("surResult", surResult);
-//			request.getSession().setAttribute("surResultAlley", surResultAlley);
 
 			} catch (SQLException e) {
 				e.printStackTrace();

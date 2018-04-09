@@ -28,7 +28,7 @@ public class DataDAO {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql.getString("selectSurArea"));
 			pstmt.setString(1, dong);
-			pstmt.setString(2,  areaCode);
+			pstmt.setString(2, areaCode);
 
 			rset = pstmt.executeQuery();
 			all = new ArrayList<AlleyDataBean>();
@@ -46,7 +46,6 @@ public class DataDAO {
 				alley.setTotalLivingPeople(rset.getFloat(9));
 				alley.setAvgIncome(rset.getFloat(10));
 				alley.setAvgOutcome(rset.getFloat(11));
-				alley.setAvgNearOutcome(rset.getFloat(12));
 				alley.setTotalFacility(rset.getFloat(13));
 				alley.setTotalNearFacility(rset.getFloat(14));
 				all.add(alley);
@@ -70,7 +69,7 @@ public class DataDAO {
 		try {
 			conn = DBUtil.getConnection();
 			pstmt = conn.prepareStatement(sql.getString("selectArea"));
-			pstmt.setString(1,  areaCode);
+			pstmt.setString(1, areaCode);
 
 			rset = pstmt.executeQuery();
 			all = new ArrayList<AlleyDataBean>();
@@ -81,16 +80,20 @@ public class DataDAO {
 				alley.setGu(rset.getString(2));
 				alley.setDong(rset.getString(3));
 				alley.setAreaCode(rset.getString(4));
-				alley.setTotalPeople(rset.getFloat(5));
-				alley.setTotalNearPeople(rset.getFloat(6));
-				alley.setTotalBizman(rset.getFloat(7));
-				alley.setTotalNearBizman(rset.getFloat(8));
-				alley.setTotalLivingPeople(rset.getFloat(9));
-				alley.setAvgIncome(rset.getFloat(10));
-				alley.setAvgOutcome(rset.getFloat(11));
-				alley.setAvgNearOutcome(rset.getFloat(12));
-				alley.setTotalFacility(rset.getFloat(13));
-				alley.setTotalNearFacility(rset.getFloat(14));
+				alley.setServiceCode(rset.getString(5));
+				alley.setTotalNearStore(rset.getFloat(6));
+				alley.setTotalStore(rset.getFloat(7));
+				alley.setAvgNearMonth(rset.getFloat(8));
+				alley.setTotalPeople(rset.getFloat(9));
+				alley.setTotalNearPeople(rset.getFloat(10));
+				alley.setTotalBizman(rset.getFloat(11));
+				alley.setTotalNearBizman(rset.getFloat(12));
+				alley.setTotalLivingPeople(rset.getFloat(13));
+				alley.setAvgIncome(rset.getFloat(14));
+				alley.setAvgOutcome(rset.getFloat(15));
+				alley.setTotalFacility(rset.getFloat(16));
+				alley.setTotalNearFacility(rset.getFloat(17));
+				alley.setSales(rset.getFloat(18));
 				all.add(alley);
 			}
 			if (all.size() != 0) {
@@ -137,7 +140,7 @@ public class DataDAO {
 			DBUtil.close(conn, pstmt, rset);
 		}
 	}
-	
+
 	public static ArrayList<ResultBean> selectResult(String areaCode) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -171,6 +174,5 @@ public class DataDAO {
 			DBUtil.close(conn, pstmt, rset);
 		}
 	}
-	
 
 }
