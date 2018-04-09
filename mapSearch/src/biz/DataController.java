@@ -28,13 +28,15 @@ public class DataController extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 
 		String dong = request.getParameter("d");
-		String areaCode = request.getParameter("area");
+		System.out.println(dong);
+		//String areaCode = request.getParameter("area");
 		String serviceCode = request.getParameter("service");
+		String areaCode="12322";
 
 		try {
 
 			ArrayList<AlleyDataBean> area = DataDAO.selectArea(areaCode);		
-			AlleyDataBean alley = GetOne.getAreaService(area, areaCode);
+			//AlleyDataBean alley = GetOne.getAreaService(area, areaCode);
 
 			//ArrayList<AlleyDataBean> surArea = DataDAO.selectSurArea(dong, areaCode);
 			//AlleyDataBean surAlley = GetOne.getAreaService(surArea, areaCode);
@@ -48,7 +50,7 @@ public class DataController extends HttpServlet {
 			// ArrayList<ResultBean> surResult = selectSurArea(areaList, serviceCode);
 
 			request.getSession().setAttribute("area", area);
-			request.getSession().setAttribute("alley", alley);
+			//request.getSession().setAttribute("alley", alley);
 			//request.getSession().setAttribute("surArea", surArea);
 			//request.getSession().setAttribute("surAlley", surAlley);
 //			request.getSession().setAttribute("result", result);
