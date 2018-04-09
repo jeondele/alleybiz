@@ -18,7 +18,6 @@ import model.GetOne;
 @WebServlet("/data")
 public class DataController extends HttpServlet {
 
-
 	public DataController() {
 	}
 
@@ -26,30 +25,46 @@ public class DataController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-
-		String g = request.getParameter("g");
-		String d = request.getParameter("d");
-		System.out.println(g);
-		System.out.println(d);
+		
+		String dong = request.getParameter("d");
+		String dongs = request.getParameter("msg");
+	
 		//String areaCode = request.getParameter("area");
 		String serviceCode = request.getParameter("service");
-		String areaCode="12322";
+		String test = request.getParameter("test");
+		System.out.println(serviceCode);
+		String areaCode = "12322";
 
-		try {
+		
 
-			ArrayList<AlleyDataBean> area = DataDAO.selectArea(areaCode);		
-			//AlleyDataBean alley = GetOne.getAreaService(area, areaCode);
+			try {
 
-			//ArrayList<AlleyDataBean> surArea = DataDAO.selectSurArea(dong, areaCode);
-			//AlleyDataBean surAlley = GetOne.getAreaService(surArea, areaCode);
+				ArrayList<AlleyDataBean> area = DataDAO.selectArea(areaCode);
+				// AlleyDataBean alley = GetOne.getAreaService(area, areaCode);
 
-//			ArrayList<ResultBean> result = DataDAO.selectResult(areaCode);
-//			ResultBean resultAlley = GetOne.getResultAreaService(result, areaCode, serviceCode);
-//
-//			ArrayList<ResultBean> surResult = DataDAO.selectSurResult(dong, areaCode);
-//			ResultBean surResultAlley = GetOne.getResultAreaService(surResult, areaCode, serviceCode);
+				// ArrayList<AlleyDataBean> surArea = DataDAO.selectSurArea(dong, areaCode);
+				// AlleyDataBean surAlley = GetOne.getAreaService(surArea, areaCode);
 
-			// ArrayList<ResultBean> surResult = selectSurArea(areaList, serviceCode);
+				// ArrayList<ResultBean> result = DataDAO.selectResult(areaCode);
+				// ResultBean resultAlley = GetOne.getResultAreaService(result, areaCode,
+				// serviceCode);
+				//
+				// ArrayList<ResultBean> surResult = DataDAO.selectSurResult(dong, areaCode);
+				// ResultBean surResultAlley = GetOne.getResultAreaService(surResult, areaCode,
+				// serviceCode);
+
+				// ArrayList<ResultBean> surResult = selectSurArea(areaList, serviceCode);
+
+				request.getSession().setAttribute("area", area);
+				// request.getSession().setAttribute("alley", alley);
+				// request.getSession().setAttribute("surArea", surArea);
+				// request.getSession().setAttribute("surAlley", surAlley);
+				// request.getSession().setAttribute("result", result);
+				// request.getSession().setAttribute("resultAlley", resultAlley);
+				// request.getSession().setAttribute("surResult", surResult);
+				// request.getSession().setAttribute("surResultAlley", surResultAlley);
+
+				response.sendRedirect("result.jsp");
 			
 			request.getSession().setAttribute("g", g);
 			request.getSession().setAttribute("d", d);
@@ -61,12 +76,10 @@ public class DataController extends HttpServlet {
 //			request.getSession().setAttribute("surResult", surResult);
 //			request.getSession().setAttribute("surResultAlley", surResultAlley);
 
-			response.sendRedirect("mapAnalysis.jsp");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
-
-	}
 
 }

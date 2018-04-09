@@ -196,6 +196,18 @@
 	font-size: 11px;
 	margin-top: 0;
 }
+
+div.check {
+	text-align: center;
+
+
+}
+#error {
+		color: #333333;
+		cursor: context-menu;
+		display: none;
+	}
+
 </style>
 
 </head>
@@ -236,7 +248,7 @@
 	</nav>
 
 	<!-- service 페이지 상권분석 부분 -->
-	<form action=data name=dong>
+	<form action=data onsubmit="onsubmit(e)">
 		<div class="sub-content-wrap ng-scope" data-ng-init="changeAddr();"
 			style="opacity: 1;">
 			<div class="page-header">
@@ -263,7 +275,7 @@
 							</label>
 							<div class="input-group">
 								<!-- 주소입력박스 -->
-								<label for="AddressDepth2" class="sr-only">주소, 상권</label> <input
+								<label for="AddressDepth2" class="sr-only"></label> <input
 									type="text" id="input" data-ng-model="input"
 									class="form-control ng-pristine ng-valid" placeholder="주소, 상권">
 								<span class="input-group-btn"> <a class="btn btn-search"
@@ -282,40 +294,40 @@
 					</h3>
 					<!-- 동으로 검색 박스 -->
 					<div class="side-select">
-							<select id="select1" name="g" onchange="cityChange()"
-								class="btn btn-select btn-block" style="width: 216px">
-								<!-- style="width: 250px; height: 35px" -->
-								<option label="자치구 를 선택하여 주십시오"></option>
-								<option>강남구</option>
-								<option>강동구</option>
-								<option>강북구</option>
-								<option>강서구</option>
-								<option>관악구</option>
-								<option>광진구</option>
-								<option>구로구</option>
-								<option>금천구</option>
-								<option>노원구</option>
-								<option>도봉구</option>
-								<option>동대문구</option>
-								<option>동작구</option>
-								<option>마포구</option>
-								<option>서대문구</option>
-								<option>서초구</option>
-								<option>성동구</option>
-								<option>성북구</option>
-								<option>송파구</option>
-								<option>양천구</option>
-								<option>영등포구</option>
-								<option>용산구</option>
-								<option>은평구</option>
-								<option>종로구</option>
-								<option>중구</option>
-								<option>중랑구</option>
-							</select> <select id="select2" name="d" class="btn btn-select btn-block"
-								style="width: 216px">
-							</select>
-							<h4 id="selectUpjong"></h4>
-							<input type="button" value="검색" onclick="mapSearch2()">
+						<select id="select1" name="g" onchange="cityChange()"
+							class="btn btn-select btn-block" style="width: 216px">
+							<!-- style="width: 250px; height: 35px" -->
+							<option label="자치구 를 선택하여 주십시오"></option>
+							<option>강남구</option>
+							<option>강동구</option>
+							<option>강북구</option>
+							<option>강서구</option>
+							<option>관악구</option>
+							<option>광진구</option>
+							<option>구로구</option>
+							<option>금천구</option>
+							<option>노원구</option>
+							<option>도봉구</option>
+							<option>동대문구</option>
+							<option>동작구</option>
+							<option>마포구</option>
+							<option>서대문구</option>
+							<option>서초구</option>
+							<option>성동구</option>
+							<option>성북구</option>
+							<option>송파구</option>
+							<option>양천구</option>
+							<option>영등포구</option>
+							<option>용산구</option>
+							<option>은평구</option>
+							<option>종로구</option>
+							<option>중구</option>
+							<option>중랑구</option>
+						</select> <select id="select2" name="d" class="btn btn-select btn-block"
+							style="width: 216px">
+						</select>
+						<h4 id="selectUpjong"></h4>
+						<input type="button" value="검색" onclick="mapSearch2()">
 					</div>
 					<hr>
 					<h3>
@@ -323,23 +335,31 @@
 					</h3>
 					<!-- 업종 선택 박스 -->
 					<div class="side-select">
-						<select id="select3" onchange="foodChange()"
+						<select id="select3" name="service" onchange="foodChange()"
 							class="btn btn-select btn-block" style="width: 216px">
 							<option label="업종 을 선택하여 주십시오"></option>
 							<option>한 식</option>
 							<option>중 식</option>
 							<option>일 식</option>
-						</select> <select id="select4" class="btn btn-select btn-block"
-							style="width: 216px">
+							<option>양 식</option>
+							<option>분 식</option>
+							<option>패스트푸드</option>
+							<option>치 킨</option>
+							<option>제 과</option>
 						</select>
 					</div>
+
 					<hr>
 					<div class="side-select-btm">
 						<a href="javascript:void(0)" data-ng-click="eraseData()"
 							class="btn btn-secondary btm-btn btn-lg" title="초기화 버튼">초기화</a>&nbsp;
 						<input type="submit" class="btn btn-primary btm-btn btn-lg fr"
 							value="분석">
+					  <div class="check">
+						<h2 id="error" style=disply:${sessionScope.test}>지역을 입력하세요.</h2>
 					</div>
+					</div>
+
 					<!-- side-select-btm -->
 				</div>
 				<!-- side-select-area -->
@@ -373,7 +393,8 @@
 			</div>
 			<!-- /.map-wap -->
 		</div>
-	</form>s
+	</form>
+	s
 	<!-- sub-content-wrap -->
 
 
@@ -387,6 +408,28 @@
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
+	
+	function onsubmit(e){		
+		e.preventDefault();
+		console.log(document.getElementById('input').value)
+		if(document.getElementById('input').value!=null||document.getElementById('select2').value!=null||document.getElementById('select3').value!=null){
+			xhttp2 = new XMLHttpRequest();
+			xhttp2.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				}
+			};
+			xhttp2.open("POST", "data", true);
+			xhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp2.send();
+			
+		}else{
+			document.getElementById('error').style.display="block";
+		}	
+	}
+	
+	
+	
+	
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
 			center : new daum.maps.LatLng(37.559053, 126.986759), // 지도의 중심좌표
@@ -418,6 +461,7 @@
 		function mapSearch() {
 
 			var myAddress = document.getElementById("input").value;
+
 			// 주소-좌표 변환 객체를 생성합니다
 			var geocoder = new daum.maps.services.Geocoder();
 
@@ -450,9 +494,22 @@
 									map.setCenter(coords);
 								}
 							});
+			sendData(myAddress);
 
 		}
+		function sendData(data) {
 
+			xhttp2 = new XMLHttpRequest();
+			xhttp2.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+				}
+			};
+			xhttp2.open("POST", "data", true);
+			xhttp2.setRequestHeader("Content-type",
+					"application/x-www-form-urlencoded");
+			xhttp2.send("msg=" + data);
+
+		}
 		//=============================================================================================================
 		//=============================================================================================================
 
@@ -849,6 +906,8 @@
 				var option = $("<option>" + changeCity[count] + "</option>");
 				$('#select2').append(option);
 			}
+
+			//stopRefresh();
 
 		}
 
