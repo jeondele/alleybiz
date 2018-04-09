@@ -225,7 +225,7 @@ div.check {
                   class="icon-bar"></span> <span class="icon-bar"></span> <span
                   class="icon-bar"></span>
             </button>
-            <a href="#" title="Investment Business Bootstrap Theme"> <img
+            <a href="index.html" title="Investment Business Bootstrap Theme"> <img
                class="logo" src="images/logo7.png"
                alt="Investment Business Bootstrap Theme" style="margin-top: 0;" />
             </a>
