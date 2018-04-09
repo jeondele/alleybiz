@@ -66,8 +66,7 @@ public class DataController extends HttpServlet {
 
 				response.sendRedirect("result.jsp");
 			
-			request.getSession().setAttribute("g", g);
-			request.getSession().setAttribute("d", d);
+
 			//request.getSession().setAttribute("alley", alley);
 			//request.getSession().setAttribute("surArea", surArea);
 			//request.getSession().setAttribute("surAlley", surAlley);
