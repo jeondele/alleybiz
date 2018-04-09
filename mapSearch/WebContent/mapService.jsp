@@ -349,6 +349,8 @@
 					<div class="map_wrap">
 						<div id="map"
 							style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+						<div id="map2"
+							style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>	
 						<ul id="category">
 							<li id="BK9" data-order="0"><span class="category_bg bank"></span>
 								은행</li>
@@ -387,29 +389,17 @@
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
-			center : new daum.maps.LatLng(37.557319, 126.924471), // 지도의 중심좌표
-			level : 6, // 지도의 확대 레벨
+			center : new daum.maps.LatLng(37.559053, 126.986759), // 지도의 중심좌표
+			level : 9, // 지도의 확대 레벨
 		};
 
 		//지도를 생성합니다
-		var map = new daum.maps.Map(mapContainer, mapOption), customOverlay = new daum.maps.CustomOverlay(
-				{}), infowindow = new daum.maps.InfoWindow({
-			removable : true
-		});
+		var map = new daum.maps.Map(mapContainer, mapOption),
+					customOverlay = new daum.maps.CustomOverlay({}),
+					infowindow = new daum.maps.InfoWindow({removable : true});
 
 		//=============================================================================================================
 		//=============================================================================================================
-
-		//마커가 표시될 위치입니다    
-		var markerPosition = new daum.maps.LatLng(37.557319, 126.924471);
-
-		// 마커를 생성합니다
-		var marker = new daum.maps.Marker({
-			position : markerPosition
-		});
-
-		// 마커가 지도 위에 표시되도록 설정합니다
-		marker.setMap(map);
 
 		//일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
 		var mapTypeControl = new daum.maps.MapTypeControl();
@@ -467,17 +457,16 @@
 		//=============================================================================================================
 
 		function getData() {
-			var arrayDong = [];
-			$.getJSON('alley.json', function(data) {
-				$.each(data, function(i, area) {
-					arrayDong.push(area);
+				var arrayDong = [];
+				$.getJSON('alley.json', function(data) {
+					$.each(data, function(i, area) {
+						arrayDong.push(area);
+					});
+					var areas = getPath(arrayDong)
+					for (var i = 0, len = areas.length; i < len; i++) {
+						displayArea(areas[i]);
+					}
 				});
-				var areas = getPath(arrayDong)
-				for (var i = 0, len = areas.length; i < len; i++) {
-					displayArea(areas[i]);
-				}
-			});
-
 		}
 
 		function getPath(data) {
@@ -831,6 +820,9 @@
 				changeCity = 서초;
 			} else if (selectCity == "성동구") {
 				changeCity = 성동;
+				mapSearch3();
+				golmok();
+				getData(false);
 			} else if (selectCity == "성북구") {
 				changeCity = 성북;
 			} else if (selectCity == "송파구") {
@@ -911,6 +903,140 @@
 							});
 
 		}
+		 
+		 
+		 function mapSearch3() {
+
+										var coords = new daum.maps.LatLng(37.558085, 127.042761);
+
+										// 결과값으로 받은 위치를 마커로 표시합니다
+										var marker = new daum.maps.Marker({
+											map2 : map,
+											position : coords
+										});
+
+										// 인포윈도우로 장소에 대한 설명을 표시합니다
+										var infowindow = new daum.maps.InfoWindow(
+												{
+													content : '<div style="width:150px;text-align:center;padding:6px 0;">여기요 여기</div>'
+												});
+										infowindow.open(map, marker);
+
+										// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+										map.setCenter(coords);
+									}
+		 
+function golmok(){
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+		center : new daum.maps.LatLng(37.556259, 127.045495), // 지도의 중심좌표
+		level : 6, // 지도의 확대 레벨
+	};
+	
+	var map2 = new daum.maps.Map(mapContainer, mapOption),
+    customOverlay = new daum.maps.CustomOverlay({}),
+    infowindow = new daum.maps.InfoWindow({removable: true});
+	
+		 function getData2() {
+				var arrayDong = [];
+				$.getJSON('golmok.json', function(data) {
+					$.each(data, function(i, area) {
+						arrayDong.push(area);
+					});
+					var areas = getPath2(arrayDong)
+					for (var i = 0, len = areas.length; i < len; i++) {
+						displayArea(areas[i]);
+					}
+				});
+
+			}
+
+			function getPath2(data) {
+				var area = []
+				for (var i = 0; i < data.length; i++) {
+					var dong = {}
+					name = data[i]["name"];
+					path = data[i]["path"];
+					var posList = []
+					for (var j = 0; j < path.length; j++) {
+						pos = new daum.maps.LatLng(path[j][0], path[j][1])
+						posList.push(pos)
+					}
+					dong["name"] = name
+					dong["path"] = posList
+					area.push(dong)
+				}
+
+				return area
+			}
+
+			getData2();
+
+			function displayArea(area) {
+
+				// 지도에 표시할 다각형을 생성합니다
+				var polygon = new daum.maps.Polygon({
+					map : map2,
+					path : area.path, // 그려질 다각형의 좌표 배열입니다
+					strokeWeight : 2, // 선의 두께입니다
+					strokeColor : '#f74e16', // 선의 색깔입니다
+					strokeOpacity : 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+					strokeStyle : 'solid', // 선의 스타일입니다
+					fillColor: '#f2744b', // 채우기 색깔입니다
+				 	fillOpacity: 0.5 // 채우기 불투명도 입니다
+				});
+
+				//#A2FF99
+				// 다각형에 마우스오버 이벤트가 발생했을 때 변경할 채우기 옵션입니다
+				var mouseoverOption = {
+					fillColor : '#e5da10', // 채우기 색깔입니다
+					fillOpacity : 0.5
+				// 채우기 불투명도 입니다        
+				};
+
+				// 다각형에 마우스아웃 이벤트가 발생했을 때 변경할 채우기 옵션입니다
+				var mouseoutOption = {
+					fillColor : '#EFFFED', // 채우기 색깔입니다 
+					fillOpacity : 0.3
+				// 채우기 불투명도 입니다        
+				};
+
+				// 다각형에 마우스오버 이벤트를 등록합니다
+				daum.maps.event.addListener(polygon, 'mouseover', function() {
+
+					// 다각형의 채우기 옵션을 변경합니다
+					polygon.setOptions(mouseoverOption);
+
+				});
+
+				daum.maps.event.addListener(polygon, 'mouseout', function() {
+
+					// 다각형의 채우기 옵션을 변경합니다
+					polygon.setOptions(mouseoutOption);
+
+				});
+
+				//다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
+				daum.maps.event
+						.addListener(
+								polygon,
+								'click',
+								function(mouseEvent) {
+									var content = '<div class="info">'
+											+ '   <div class="title">'
+											+ '<strong>상권 명 :</strong> ???'
+											+ '</div>'
+											+ '   <div class="size"><strong>상권 경쟁 지수 :</strong> ?????'
+											+ '</div>';
+
+									infowindow.setContent(content);
+									infowindow.setPosition(mouseEvent.latLng);
+									infowindow.setMap(map);
+								});
+			}
+}
+
 
 		//=============================================================================================================
 		//=============================================================================================================
