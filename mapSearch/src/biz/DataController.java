@@ -28,6 +28,8 @@ public class DataController extends HttpServlet {
 		
 		String dong = request.getParameter("d");
 		String dongs = request.getParameter("msg");
+	
+		//String areaCode = request.getParameter("area");
 		String serviceCode = request.getParameter("service");
 		String test = request.getParameter("test");
 		System.out.println(serviceCode);
@@ -63,6 +65,16 @@ public class DataController extends HttpServlet {
 				// request.getSession().setAttribute("surResultAlley", surResultAlley);
 
 				response.sendRedirect("result.jsp");
+			
+			request.getSession().setAttribute("g", g);
+			request.getSession().setAttribute("d", d);
+			//request.getSession().setAttribute("alley", alley);
+			//request.getSession().setAttribute("surArea", surArea);
+			//request.getSession().setAttribute("surAlley", surAlley);
+//			request.getSession().setAttribute("result", result);
+//			request.getSession().setAttribute("resultAlley", resultAlley);
+//			request.getSession().setAttribute("surResult", surResult);
+//			request.getSession().setAttribute("surResultAlley", surResultAlley);
 
 			} catch (SQLException e) {
 				e.printStackTrace();

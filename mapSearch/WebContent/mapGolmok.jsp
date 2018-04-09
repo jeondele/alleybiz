@@ -79,7 +79,7 @@
  			<button onclick="mapSearch()">위치 검색</button>
  			<hr color="black" style="width:500px" align="left">
  			
- 			<form name="dong" action="data">
+ 			<form name="dong">
  			<select id="select1" name="g" onchange="cityChange()" style="width:250px; height:35px">
  				<option label="자치구 를 선택하여 주십시오"></option>
 				<option>강남구</option>
@@ -112,29 +112,24 @@
 			<select id="select2" name="d" style="width:250px; height:35px">
 			</select>
 			<input type="button" value="동 검색" onclick="mapSearch2()">
-			
+			</form>
 
  			<hr color="black" style="width:500px" align="left">
  			
  			
-             <select id="select3" name="service" onchange="foodChange()" style="width:250px; height:35px">
+             <select id="select3" onchange="foodChange()" style="width:250px; height:35px">
  				<option label="업종 을 선택하여 주십시오"></option>
 				<option>한 식</option>
 				<option>중 식</option>
 				<option>일 식</option>
-				<option>양 식</option>
-				<option>카페</option>
-				<option>베이커리</option>
-				<option>호프</option>				
 			</select>
 				 
 			<select id="select4" style="width:250px; height:35px">
 			</select>
-             <hr color="black" style="width:500px" align="left">        
-        	
-             <input type="submit" value="분석" >
+             <hr color="black" style="width:500px" align="left">             
+             
              <input type="text" placeholder="동일 업종" style="width:500px; height:35px">
-             </form>
+             
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55d81c6e682f667cceb61a2a681598bf&libraries=services"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
@@ -142,7 +137,7 @@
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 mapOption = {
-    center: new daum.maps.LatLng(37.557319, 126.924471), // 지도의 중심좌표
+    center: new daum.maps.LatLng(37.555280, 127.043614), // 지도의 중심좌표
     level: 6, // 지도의 확대 레벨
 };
 
@@ -156,7 +151,7 @@ infowindow = new daum.maps.InfoWindow({removable: true});
 	
 
 //마커가 표시될 위치입니다 
-var markerPosition  = new daum.maps.LatLng(37.557319, 126.924471);
+var markerPosition  = new daum.maps.LatLng(37.555280, 127.043614);
 
 // 마커를 생성합니다
 var marker = new daum.maps.Marker({
@@ -220,7 +215,7 @@ function mapSearch() {
 
 function getData(){
     var arrayDong=[];
-    $.getJSON('alley.json', function(data) {
+    $.getJSON('golmok.json', function(data) {
        $.each(data, function(i, area) {
           arrayDong.push(area);
        });  
@@ -232,6 +227,7 @@ function getData(){
 
  }
 
+
  function getPath(data){
     var area=[]
     for(var i=0; i<data.length; i++){
@@ -240,7 +236,7 @@ function getData(){
        path=data[i]["path"];
        var posList=[]
        for(var j=0; j<path.length; j++){        
-          pos=new daum.maps.LatLng(path[j][1], path[j][0])
+          pos=new daum.maps.LatLng(path[j][0], path[j][1])
           posList.push(pos)
        }
        dong["name"]=name
@@ -250,8 +246,13 @@ function getData(){
 
     return area
  }
-
+ 
 getData();
+
+
+
+
+
 
 //다각형을 생상하고 이벤트를 등록하는 함수입니다!
 function displayArea(area) {
@@ -264,8 +265,8 @@ var polygon = new daum.maps.Polygon({
     strokeColor: '#ffae23', // 선의 색깔입니다
     strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
     strokeStyle: 'solid', // 선의 스타일입니다
-   /*  fillColor: '#EFFFED', // 채우기 색깔입니다
-    fillOpacity: 0.3 // 채우기 불투명도 입니다 */
+    fillColor: '#EFFFED', // 채우기 색깔입니다
+    fillOpacity: 0.3 // 채우기 불투명도 입니다
 });
 
 
