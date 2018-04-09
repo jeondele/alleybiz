@@ -248,7 +248,7 @@ div.check {
 	</nav>
 
 	<!-- service 페이지 상권분석 부분 -->
-	<form action=data onsubmit="onsubmit(e)">
+	<form action="data" name="dong">
 		<div class="sub-content-wrap ng-scope" data-ng-init="changeAddr();"
 			style="opacity: 1;">
 			<div class="page-header">
@@ -356,7 +356,8 @@ div.check {
 						<input type="submit" class="btn btn-primary btm-btn btn-lg fr"
 							value="분석">
 					  <div class="check">
-						<h2 id="error" style=disply:${sessionScope.test}>지역을 입력하세요.</h2>
+						<h2 id="error" style="display:${sessionScope.area}">지역을 입력하세요.</h2>
+						<h2 id="error" style="display:${sessionScope.service}">지역을 입력하세요.</h2>
 					</div>
 					</div>
 
@@ -369,8 +370,7 @@ div.check {
 					<div class="map_wrap">
 						<div id="map"
 							style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-						<div id="map2"
-							style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>	
+							
 						<ul id="category">
 							<li id="BK9" data-order="0"><span class="category_bg bank"></span>
 								은행</li>
@@ -409,26 +409,6 @@ div.check {
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script>
 	
-	function onsubmit(e){		
-		e.preventDefault();
-		console.log(document.getElementById('input').value)
-		if(document.getElementById('input').value!=null||document.getElementById('select2').value!=null||document.getElementById('select3').value!=null){
-			xhttp2 = new XMLHttpRequest();
-			xhttp2.onreadystatechange = function() {
-			if (this.readyState == 4 && this.status == 200) {
-				}
-			};
-			xhttp2.open("POST", "data", true);
-			xhttp2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xhttp2.send();
-			
-		}else{
-			document.getElementById('error').style.display="block";
-		}	
-	}
-	
-	
-	
 	
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
@@ -459,7 +439,8 @@ div.check {
 		//=============================================================================================================
 
 		function mapSearch() {
-
+			map.setLevel(5);
+			
 			var myAddress = document.getElementById("input").value;
 
 			// 주소-좌표 변환 객체를 생성합니다
@@ -600,7 +581,7 @@ div.check {
 							function(mouseEvent) {
 								var content = '<div class="info">'
 										+ '   <div class="title">'
-										+ '<strong>상권 명 :</strong> ???'
+										+ '<strong>상권 명 :'+area.name+'</strong>'
 										+ '</div>'
 										+ '   <div class="size"><strong>상권 경쟁 지수 :</strong> ?????'
 										+ '</div>';
@@ -922,7 +903,8 @@ div.check {
 		 };
 		 */
 		function mapSearch2() {
-
+			 map.setLevel(5);
+				
 			var index1 = document.dong.g.options.selectedIndex;
 			var index2 = document.dong.d.options.selectedIndex;
 			var myAddress = document.dong.g.options[index1].text + " "
@@ -1081,18 +1063,18 @@ function golmok(){
 						.addListener(
 								polygon,
 								'click',
-								function(mouseEvent) {
+									function(mouseEvent) {
 									var content = '<div class="info">'
-											+ '   <div class="title">'
-											+ '<strong>상권 명 :</strong> ???'
-											+ '</div>'
-											+ '   <div class="size"><strong>상권 경쟁 지수 :</strong> ?????'
-											+ '</div>';
+												+ '   <div class="title">'
+												+ '<strong>상권 명 :'+area.name+'</strong>'
+												+ '</div>'
+												+ '   <div class="size"><strong>상권 경쟁 지수 :</strong> ?????'
+												+ '</div>';
 
-									infowindow.setContent(content);
-									infowindow.setPosition(mouseEvent.latLng);
-									infowindow.setMap(map);
-								});
+										infowindow.setContent(content);
+										infowindow.setPosition(mouseEvent.latLng);
+										infowindow.setMap(map2);
+									});
 			}
 }
 
