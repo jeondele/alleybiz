@@ -21,7 +21,7 @@
 			<th>totalNearFacility</th>
 		</tr>
 
-		<c:forEach items="${sessionScope.area}" var="dataAll" >
+		<%-- <c:forEach items="${sessionScope.area}" var="dataAll" >
 			<tr>
 				<td>${dataAll.date}</td>
 				<td>${dataAll.gu}</td>
@@ -40,7 +40,7 @@
 				<td>${dataAll.totalNearFacility}</td>
 				
 			</tr>
-		</c:forEach>
+		</c:forEach> --%>
 		</table>
 		
 		
