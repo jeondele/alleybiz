@@ -40,8 +40,52 @@ public class DataController extends HttpServlet {
 			request.getSession().setAttribute("service", "block");
 			response.sendRedirect("mapService.jsp");
 
+
 		} else {
 			response.sendRedirect("result.jsp");
+
+			try {
+
+				ArrayList<AlleyDataBean> area = DataDAO.selectArea(areaCode);
+				// AlleyDataBean alley = GetOne.getAreaService(area, areaCode);
+
+				// ArrayList<AlleyDataBean> surArea = DataDAO.selectSurArea(dong, areaCode);
+				// AlleyDataBean surAlley = GetOne.getAreaService(surArea, areaCode);
+
+				// ArrayList<ResultBean> result = DataDAO.selectResult(areaCode);
+				// ResultBean resultAlley = GetOne.getResultAreaService(result, areaCode,
+				// serviceCode);
+				//
+				// ArrayList<ResultBean> surResult = DataDAO.selectSurResult(dong, areaCode);
+				// ResultBean surResultAlley = GetOne.getResultAreaService(surResult, areaCode,
+				// serviceCode);
+
+				// ArrayList<ResultBean> surResult = selectSurArea(areaList, serviceCode);
+
+				request.getSession().setAttribute("area", area);
+				// request.getSession().setAttribute("alley", alley);
+				// request.getSession().setAttribute("surArea", surArea);
+				// request.getSession().setAttribute("surAlley", surAlley);
+				// request.getSession().setAttribute("result", result);
+				// request.getSession().setAttribute("resultAlley", resultAlley);
+				// request.getSession().setAttribute("surResult", surResult);
+				// request.getSession().setAttribute("surResultAlley", surResultAlley);
+
+				response.sendRedirect("result.jsp");
+			
+
+			//request.getSession().setAttribute("alley", alley);
+			//request.getSession().setAttribute("surArea", surArea);
+			//request.getSession().setAttribute("surAlley", surAlley);
+//			request.getSession().setAttribute("result", result);
+//			request.getSession().setAttribute("resultAlley", resultAlley);
+//			request.getSession().setAttribute("surResult", surResult);
+//			request.getSession().setAttribute("surResultAlley", surResultAlley);
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 		}
 	}
 
