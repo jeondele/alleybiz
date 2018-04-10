@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 	<link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/magnific-popup.css" rel="stylesheet">
+	<link id="themecss" rel="stylesheet" type="text/css" href="https://www.shieldui.com/shared/components/latest/css/light-glow/all.min.css" />
     <link href="css/theme.css" rel="stylesheet">
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -34,7 +35,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a href="index.html" title="Investment Business Bootstrap Theme">
+			<a href="#" title="Investment Business Bootstrap Theme">
                 <img class="logo" src="images/logo7.png" alt="Investment Business Bootstrap Theme" style="margin-top:0;" />
             </a>
 		</div>
@@ -44,47 +45,61 @@
 				<li><a href="index.html">HOME</a></li>
 				<li><a href="about.html">TEAM</a></li>
 				<li><a href="mapService.jsp">SERVICES</a></li>
-				<li><a href="project.html">PROJECT</a></li>
-				<li class="active"><a href="contact.html"  class="smooth-scroll">CONTACT</a></li>
+				<li class="active"><a href="project.html" class="smooth-scroll">PROJECT</a></li>
+				<li><a href="contact.html">CONTACT</a></li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
 </nav>
 
-<div class="container-contact">
+<div class="container-project-prview">
     <div class="container">
-	    <div class="page-header" id="contact">
-            <h1>Get In Touch With Us</h1>
-			<br />
-			<div class="row">
-				<div class="col-md-6">
-					<div id="googlemap"></div>
-				</div>
-				<div class="col-md-6">
-					<form>
-						<div class="form-group">
-							<label for="form-name">Name</label>
-							<input type="email" class="form-control" id="form-name" placeholder="Name">
-						</div>
-						<div class="form-group">
-							<label for="form-email">Email Address</label>
-							<input type="email" class="form-control" id="form-email" placeholder="Email Address">
-						</div>
-						<div class="form-group">
-							<label for="form-subject">Telephone</label>
-							<input type="text" class="form-control" id="form-subject" placeholder="Subject">
-						</div>
-						<div class="form-group">
-							<label for="form-message">Email your Message</label>
-							<textarea class="form-control" id="form-message" placeholder="Message"></textarea>
-						</div>
-						<button type="submit" class="btn btn-primary btn-lg" style="margin:10px;">Register Now</button>
-						<br /><br />
-					</form>
-				 </div>
-			</div>
+		<div class="page-header" id="preview">
+			<h1 class="text-warning">Preview Of Our Latest Projects</h1>
         </div>
-    </div>
+		<div class="row">
+            <div class="col-md-8" style="margin-bottom:20px;">
+				<div id="chart"></div>
+			</div>
+			<div class="col-md-4" style="margin-bottom:20px;">
+                <div id="piechart"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-project">
+    <div class="container">
+		<div class="page-header" id="project">
+			<h1>Our Recent Projects</h1>
+        </div>
+        <div class="row">
+		    <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="hovereffect">
+                    <img class="img-responsive" style="margin: 10px;" src="images/gallery/gallery4.jpg" />
+                    <div class="overlay">
+                        <h2>Individual</h2>
+                    </div>
+			    </div>
+		    </div>
+		    <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="hovereffect">
+                    <img class="img-responsive" style="margin: 10px;" src="images/gallery/gallery5.jpg" />
+                    <div class="overlay">
+                        <h2>Business</h2>
+                    </div>
+			    </div>
+		    </div>
+		    <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="hovereffect">
+                    <img class="img-responsive" style="margin: 10px;" src="images/gallery/gallery6.jpg">
+                    <div class="overlay">
+                        <h2>Investment</h2>
+                    </div>
+                </div>
+		    </div>
+	    </div>
+	</div>
 </div>
 
 <footer id="subfooter" class="clearfix">
@@ -157,21 +172,64 @@
 
 <script src="js/jquery.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script type="text/javascript" src="https://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+<script src="js/gridData.js"></script>
 <script src="js/theme.js"></script>
 
 <script type="text/javascript">
     jQuery(function($) {
+        $("#chart").shieldChart({
+            seriesPalette: ["#f2c500", "#333333", "#e94b35"],
+            primaryHeader: {
+                text: "GDP Changes per region"
+            },
+            axisX: {
+                categoricalValues: ["2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011"]
+            },
+            dataSeries: [{
+                seriesType: 'area',
+                collectionAlias: "India",
+                data: [3.907, 7.943, 7.848, 9.284, 9.263, 9.801, 3.890, 8.238, 9.552, 6.855]
+            }, {
+                seriesType: 'area',
+                collectionAlias: "World - wide",
+                data: [1.988, 2.733, 3.994, 3.464, 4.001, 3.939, 1.333, -2.245, 4.339, 2.727]
+            }, {
+                seriesType: 'area',
+                collectionAlias: "Haiti",
+                data: [-0.253, 0.362, -3.519, 1.799, 2.252, 3.343, 0.843, 2.877, -5.416, 5.590]
+            }]
+        });
 
-        // Google Maps setup
-        var googlemap = new google.maps.Map(
-            document.getElementById('googlemap'),
-            {
-                center: new google.maps.LatLng(44.5403, -78.5463),
-                zoom: 8,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            }
-        );
+        $("#piechart").shieldChart({
+            seriesPalette: ["#f2c500", "#333333", "#e94b35"],
+            exportOptions: {
+                image: false,
+                print: false
+            },
+            primaryHeader: {
+                text: "Browsers Popularity amongst Users"
+            },
+            chartLegend: {
+                enabled: true
+            },
+            seriesSettings: {
+                pie: {
+                    enablePointSelection: true
+                }
+            },
+            dataSeries: [{
+                seriesType: "pie",
+                collectionAlias: "Usage",
+                data: [
+                    ["IE", 9.0],
+                    { collectionAlias: "Firefox", y: 26.8, selected: true },
+                    ["Chrome", 55.8],
+                    ["Safari", 3.8],
+                    ["Opera", 1.9]
+                ]
+            }]
+        });
     });
 </script>
 

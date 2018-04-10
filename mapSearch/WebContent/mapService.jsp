@@ -394,6 +394,193 @@ div.check {
 			<!-- /.map-wap -->
 		</div>
 	</form>
+	
+	<!-- sub-content-wrap -->
+
+
+	<!-- Navbar -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a href="#" title="Investment Business Bootstrap Theme"> <img
+					class="logo" src="images/logo7.png"
+					alt="Investment Business Bootstrap Theme" style="margin-top: 0;" />
+				</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="index.html">HOME</a></li>
+					<li><a href="about.html">TEAM</a></li>
+					<li class="active"><a href="mapService.jsp"
+						class="smooth-scroll">SERVICES</a></li>
+					<li><a href="project.html">PROJECT</a></li>
+					<li><a href="contact.html">CONTACT</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+	<!-- service 페이지 상권분석 부분 -->
+	<form action="data" name="dong">
+		<div class="sub-content-wrap ng-scope" data-ng-init="changeAddr();"
+			style="opacity: 1;">
+			<div class="page-header">
+				<h2>상권분석</h2>
+			</div>
+			<div class="map-wrap">
+				<div class="side-select-area">
+					<h3>
+						<strong>[1단계]</strong> 지역선택
+					</h3>
+					<div class="space-search">
+						<!-- 주소 입력 -->
+						<div class="tab-pane" id="address3">
+							<label class="control radio"> <input type="radio"
+								class="add-contrast ng-pristine ng-valid"
+								data-ng-model="searchAddrType" id="searchAddrTypeDong"
+								value="dong" alt="행정동" data-role="collar" checked="true"
+								name="004"> <span class="control-indicator"></span>지번
+							</label> <label class="control radio"> <input type="radio"
+								class="add-contrast ng-pristine ng-valid"
+								data-ng-model="searchAddrType" id="searchAddrTypeRoad"
+								value="road" alt="도로명" data-role="collar" name="005"> <span
+								class="control-indicator"></span>도로명
+							</label>
+							<div class="input-group">
+								<!-- 주소입력박스 -->
+								<label for="AddressDepth2" class="sr-only"></label> <input
+									type="text" id="input" data-ng-model="input"
+									class="form-control ng-pristine ng-valid" placeholder="주소, 상권">
+								<span class="input-group-btn"> <a class="btn btn-search"
+									onclick="mapSearch()" data-ng-click="inputAddrSearch(1)"
+									title="주소,상호,상권 검색 버튼"> <img src="images/search1.png"
+										alt="검색">
+								</a>
+								</span>
+							</div>
+							<!-- /주소입력박스 -->
+						</div>
+					</div>
+					<hr>
+					<h3 id="selectUpjong">
+						<strong>[2단계]</strong> 동으로 검색
+					</h3>
+					<!-- 동으로 검색 박스 -->
+
+					<div class="side-select">
+						<select id="select1" name="g" onchange="cityChange()"
+							class="btn btn-select btn-block" style="width: 216px">
+							<!-- style="width: 250px; height: 35px" -->
+							<option label="자치구를 선택하여 주십시오"></option>
+							<option>강남구</option>
+							<option>강동구</option>
+							<option>강북구</option>
+							<option>강서구</option>
+							<option>관악구</option>
+							<option>광진구</option>
+							<option>구로구</option>
+							<option>금천구</option>
+							<option>노원구</option>
+							<option>도봉구</option>
+							<option>동대문구</option>
+							<option>동작구</option>
+							<option>마포구</option>
+							<option>서대문구</option>
+							<option>서초구</option>
+							<option>성동구</option>
+							<option>성북구</option>
+							<option>송파구</option>
+							<option>양천구</option>
+							<option>영등포구</option>
+							<option>용산구</option>
+							<option>은평구</option>
+							<option>종로구</option>
+							<option>중구</option>
+							<option>중랑구</option>
+						</select> <select id="select2" name="d" class="btn btn-select btn-block"
+							style="width: 216px">
+						</select>
+						<h4 id="selectUpjong"></h4>
+						<input type="button" value="검색" onclick="mapSearch2()">
+					</div>
+					<hr>
+					<h3>
+						<strong>[3단계]</strong> 업종선택
+					</h3>
+					<!-- 업종 선택 박스 -->
+					<div class="side-select">
+						<select id="select3" name="service" onchange="foodChange()"
+							class="btn btn-select btn-block" style="width: 216px">
+							<option label="업종을 선택하여 주십시오"></option>
+							<option>한 식</option>
+							<option>중 식</option>
+							<option>일 식</option>
+							<option>양 식</option>
+							<option>분 식</option>
+							<option>패스트푸드</option>
+							<option>치 킨</option>
+							<option>제 과</option>
+						</select>
+					</div>
+
+					<hr>
+					<div class="side-select-btm">
+						<a href="javascript:void(0)" data-ng-click="eraseData()"
+							class="btn btn-secondary btm-btn btn-lg" title="초기화 버튼">초기화</a>&nbsp;
+						<input type="submit" class="btn btn-primary btm-btn btn-lg fr"
+							value="분석">
+						<div class="check">
+							<h2 id="error" style="display: ${sessionScope.area}">지역을 선택하세요.</h2>
+							<h3 id="error" style="display: ${sessionScope.service}">업종을 선택하세요.</h3>
+						</div>
+					</div>
+
+					<!-- side-select-btm -->
+				</div>
+				<!-- side-select-area -->
+				<div id="contentWrapper" class="map-right-area">
+
+					<!-- roadViewWrapper -->
+					<div class="map_wrap">
+						<div id="map"
+							style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+						<div id="map2"
+							style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+						<ul id="category">
+							<li id="BK9" data-order="0"><span class="category_bg bank"></span>
+								은행</li>
+							<li id="MT1" data-order="1"><span class="category_bg mart"></span>
+								마트</li>
+							<li id="PM9" data-order="2"><span
+								class="category_bg pharmacy"></span> 약국</li>
+							<li id="OL7" data-order="3"><span class="category_bg oil"></span>
+								주유소</li>
+							<li id="CE7" data-order="4"><span class="category_bg cafe"></span>
+								카페</li>
+							<li id="CS2" data-order="5"><span class="category_bg store"></span>
+								편의점</li>
+						</ul>
+					</div>
+					<div id="map"></div>
+					<!-- map_warp(daum map) -->
+				</div>
+				<!-- contentWrapper -->
+			</div>
+			<!-- /.map-wap -->
+		</div>
+	</form>
 	s
 	<!-- sub-content-wrap -->
 
