@@ -193,7 +193,7 @@
 								<!-- 업종분석 이동 탭 -->
 								<div class="tabs-line" id="famenu_upjong" style="">
 									<h2 class="famenu-title">
-										<a href="javascript:goTop();">상권분석 보고서 </a>
+										<a href="mapService.jsp">상권분석 보고서 </a>
 									</h2>
 
 									<span class="report-btn"> <a href="javascript:void(0)"
