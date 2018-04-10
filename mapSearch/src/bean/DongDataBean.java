@@ -1,9 +1,8 @@
 package bean;
 
-public class AlleyDataBean {
-	private String areaCode;
+public class DongDataBean {
+
 	private String date;
-	private String gu;
 	private String dong;
 	private float totalPeople;
 	private float totalNearPeople;
@@ -17,25 +16,10 @@ public class AlleyDataBean {
 	private float totalFacility;
 	private float totalNearFacility;
 
-	public AlleyDataBean() {
+	public DongDataBean() {
 
 	}
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getGu() {
-		return gu;
-	}
-
-	public void setGu(String gu) {
-		this.gu = gu;
-	}
-
+	
 	public String getDong() {
 		return dong;
 	}
@@ -44,12 +28,12 @@ public class AlleyDataBean {
 		this.dong = dong;
 	}
 
-	public String getAreaCode() {
-		return areaCode;
+	public String getDate() {
+		return date;
 	}
 
-	public void setAreaCode(String areaCode) {
-		this.areaCode = areaCode;
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public float getTotalPeople() {
