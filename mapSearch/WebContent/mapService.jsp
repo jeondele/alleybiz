@@ -234,7 +234,7 @@ div.check {
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="index.html">HOME</a></li>
 					<li><a href="about.html">TEAM</a></li>
-					<li class="active"><a href="services.html"
+					<li class="active"><a href="mapService.jsp"
 						class="smooth-scroll">SERVICES</a></li>
 					<li><a href="project.html">PROJECT</a></li>
 					<li><a href="contact.html">CONTACT</a></li>
