@@ -356,7 +356,7 @@ div.check {
 							value="분석">
 						<div class="check">
 							<h2 id="error" style="display: ${sessionScope.areaCheck}">지역을 선택하세요.</h2>
-							<h3 id="error" style="display: ${sessionScope.serviceCheck}">업종을 선택하세요.</h3>
+							<h2 id="error" style="display: ${sessionScope.serviceCheck}">업종을 선택하세요.</h2>
 						</div>
 					</div>
 

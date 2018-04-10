@@ -36,7 +36,7 @@ public class DataController extends HttpServlet {
 		if (dong == null) {
 			request.getSession().setAttribute("areaCheck", "block");
 			response.sendRedirect("mapService.jsp");
-		} else if (service == null) {
+		} else if (service.length()<2) {
 			request.getSession().setAttribute("serviceCheck", "block");
 			response.sendRedirect("mapService.jsp");
 
