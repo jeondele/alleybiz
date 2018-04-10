@@ -247,6 +247,109 @@ div.check {
       <!-- /.container-fluid -->
    </nav>
 
+<<<<<<< HEAD
+   <!-- service 페이지 상권분석 부분 -->
+   <form action="data" name="dong">
+      <div class="sub-content-wrap ng-scope" data-ng-init="changeAddr();"
+         style="opacity: 1;">
+         <div class="page-header">
+            <h2>상권분석</h2>
+         </div>
+         <div class="map-wrap">
+            <div class="side-select-area">
+               <h3>
+                  <strong>[1단계]</strong> 지역선택
+               </h3>
+               <div class="space-search">
+                  <!-- 주소 입력 -->
+                  <div class="tab-pane" id="address3">
+                     <label class="control radio"> <input type="radio"
+                        class="add-contrast ng-pristine ng-valid"
+                        data-ng-model="searchAddrType" id="searchAddrTypeDong"
+                        value="dong" alt="행정동" data-role="collar" checked="true"
+                        name="004"> <span class="control-indicator"></span>지번
+                     </label> <label class="control radio"> <input type="radio"
+                        class="add-contrast ng-pristine ng-valid"
+                        data-ng-model="searchAddrType" id="searchAddrTypeRoad"
+                        value="road" alt="도로명" data-role="collar" name="005"> <span
+                        class="control-indicator"></span>도로명
+                     </label>
+                     <div class="input-group">
+                        <!-- 주소입력박스 -->
+                        <label for="AddressDepth2" class="sr-only"></label> <input
+                           type="text" id="input" data-ng-model="input"
+                           class="form-control ng-pristine ng-valid" placeholder="주소, 상권">
+                        <span class="input-group-btn"> <a class="btn btn-search"
+                           onclick="mapSearch()" data-ng-click="inputAddrSearch(1)"
+                           title="주소,상호,상권 검색 버튼"> <img src="images/search1.png"
+                              alt="검색">
+                        </a>
+                        </span>
+                     </div>
+                     <!-- /주소입력박스 -->
+                  </div>
+               </div>
+               <hr>
+               <h3 id="selectUpjong">
+                  <strong>[2단계]</strong> 동으로 검색
+               </h3>
+               <!-- 동으로 검색 박스 -->
+               <div class="side-select">
+                  <select id="select1" name="g" onchange="cityChange()"
+                     class="btn btn-select btn-block" style="width: 216px">
+                     <!-- style="width: 250px; height: 35px" -->
+                     <option label="자치구 를 선택하여 주십시오"></option>
+                     <option>강남구</option>
+                     <option>강동구</option>
+                     <option>강북구</option>
+                     <option>강서구</option>
+                     <option>관악구</option>
+                     <option>광진구</option>
+                     <option>구로구</option>
+                     <option>금천구</option>
+                     <option>노원구</option>
+                     <option>도봉구</option>
+                     <option>동대문구</option>
+                     <option>동작구</option>
+                     <option>마포구</option>
+                     <option>서대문구</option>
+                     <option>서초구</option>
+                     <option>성동구</option>
+                     <option>성북구</option>
+                     <option>송파구</option>
+                     <option>양천구</option>
+                     <option>영등포구</option>
+                     <option>용산구</option>
+                     <option>은평구</option>
+                     <option>종로구</option>
+                     <option>중구</option>
+                     <option>중랑구</option>
+                  </select> <select id="select2" name="d" class="btn btn-select btn-block"
+                     style="width: 216px">
+                  </select>
+                  <h4 id="selectUpjong"></h4>
+                  <input type="button" value="검색" onclick="mapSearch2()">
+               </div>
+               <hr>
+               <h3>
+                  <strong>[3단계]</strong> 업종선택
+               </h3>
+               <!-- 업종 선택 박스 -->
+               <div class="side-select">
+                  <select id="select3" name="service" onchange="foodChange()"
+                     class="btn btn-select btn-block" style="width: 216px">
+                     <option label="업종 을 선택하여 주십시오"></option>
+                     <option>한 식</option>
+                     <option>중 식</option>
+                     <option>일 식</option>
+                     <option>양 식</option>
+                     <option>분 식</option>
+                     <option>패스트푸드</option>
+                     <option>치 킨</option>
+                     <option>제 과</option>
+                  </select>
+               </div>
+=======
    <!-- service 페이지 상권분석 부분 -->
    <form action=data onsubmit="onsubmit(e)">
       <div class="sub-content-wrap ng-scope" data-ng-init="changeAddr();"
@@ -356,16 +459,60 @@ div.check {
                   <input type="submit" class="btn btn-primary btm-btn btn-lg fr"
                      value="분석">
                  <div class="check">
+                  <h2 id="error" style="display:${sessionScope.area}">지역을 입력하세요.</h2>
+                  <h2 id="error" style="display:${sessionScope.service}">지역을 입력하세요.</h2>
+               </div>
+               </div>
+=======
+               <hr>
+               <div class="side-select-btm">
+                  <a href="javascript:void(0)" data-ng-click="eraseData()"
+                     class="btn btn-secondary btm-btn btn-lg" title="초기화 버튼">초기화</a>&nbsp;
+                  <input type="submit" class="btn btn-primary btm-btn btn-lg fr"
+                     value="분석">
+                 <div class="check">
                   <h2 id="error" style=disply:${sessionScope.test}>지역을 입력하세요.</h2>
                </div>
                </div>
+
 
                <!-- side-select-btm -->
             </div>
             <!-- side-select-area -->
             <div id="contentWrapper" class="map-right-area">
 
+
                <!-- roadViewWrapper -->
+               <div class="map_wrap">
+                  <div id="map"
+                     style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+                     
+                  <ul id="category">
+                     <li id="BK9" data-order="0"><span class="category_bg bank"></span>
+                        은행</li>
+                     <li id="MT1" data-order="1"><span class="category_bg mart"></span>
+                        마트</li>
+                     <li id="PM9" data-order="2"><span
+                        class="category_bg pharmacy"></span> 약국</li>
+                     <li id="OL7" data-order="3"><span class="category_bg oil"></span>
+                        주유소</li>
+                     <li id="CE7" data-order="4"><span class="category_bg cafe"></span>
+                        카페</li>
+                     <li id="CS2" data-order="5"><span class="category_bg store"></span>
+                        편의점</li>
+                  </ul>
+               </div>
+               <div id="map"></div>
+               <!-- map_warp(daum map) -->
+            </div>
+            <!-- contentWrapper -->
+         </div>
+         <!-- /.map-wap -->
+      </div>
+   </form>
+
+   <!-- sub-content-wrap -->
+      <!-- roadViewWrapper -->
                <div class="map_wrap">
                   <div id="map"
                      style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
@@ -399,9 +546,20 @@ div.check {
 
 
 
-   <!-- ######################################## -->
 
 
+   <script type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55d81c6e682f667cceb61a2a681598bf&libraries=services"></script>
+   <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script>
+   
+   
+      var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+      mapOption = {
+         center : new daum.maps.LatLng(37.559053, 126.986759), // 지도의 중심좌표
+         level : 9, // 지도의 확대 레벨
+      };
 
    <script type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=55d81c6e682f667cceb61a2a681598bf&libraries=services"></script>
@@ -436,6 +594,7 @@ div.check {
          level : 9, // 지도의 확대 레벨
       };
 
+
       //지도를 생성합니다
       var map = new daum.maps.Map(mapContainer, mapOption),
                customOverlay = new daum.maps.CustomOverlay({}),
@@ -458,6 +617,11 @@ div.check {
       //=============================================================================================================
       //=============================================================================================================
 
+
+      function mapSearch() {
+         map.setLevel(5);
+         
+         var myAddress = document.getElementById("input").value;
       function mapSearch() {
 
          var myAddress = document.getElementById("input").value;
@@ -510,8 +674,6 @@ div.check {
          xhttp2.send("msg=" + data);
 
       }
-      //=============================================================================================================
-      //=============================================================================================================
 
       function getData() {
             var arrayDong = [];
@@ -592,6 +754,18 @@ div.check {
 
          });
 
+         //다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
+         daum.maps.event
+               .addListener(
+                     polygon,
+                     'click',
+                     function(mouseEvent) {
+                        var content = '<div class="info">'
+                              + '   <div class="title">'
+                              + '<strong>상권 명 :'+area.name+'</strong>'
+                              + '</div>'
+                              + '   <div class="size"><strong>상권 경쟁 지수 :</strong> ?????'
+                              + '</div>';
          //다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
          daum.maps.event
                .addListener(
@@ -811,321 +985,4 @@ div.check {
          var 강북 = [ "미아동", "번동", "삼양동", "송중동", "송천동", "수유동" ];
          var 강서 = [ "가양동", "공항동", "등촌동", "발산동", "방화동", "염창동", "우장산동", "화곡동" ];
          var 관악 = [ "낙성대동", "난곡동", "남현동", "대학동", "미성동", "보라매동", "서림동",
-               "신림동", "신사동", "신원동", "은천동", "인헌동", "조원동", "조원동", "중앙동",
-               "청룡동", "행운동" ];
-         var 광진 = [ "광장동", "구의동", "군자동", "능동", "자양동", "중곡동", "화양동" ];
-         var 구로 = [ "가리봉동", "개봉동", "고척동", "구로동", "수궁동", "신도림동", "오류동" ];
-         var 금천 = [ "가산동", "독산동", "시흥동" ];
-         var 노원 = [ "공릉동", "상계동", "월계동", "중계동" ];
-         var 도봉 = [ "도봉동", "방학동", "쌍문동", "창동" ];
-         var 동대문 = [ "답십리동", "용신동", "이문동", "장안동", "전농동", "제기동", "청량리동",
-               "회기동", "휘경동" ];
-         var 동작구 = [ "노량진동", "대방동", "사당동", "상도동", "신대방동", "흑석동" ];
-         var 마포구 = [ "공덕동", "대흥동", "도화동", "망원동", "상암동", "서교동", "성산동", "신수동",
-               "아현동", "연남동", "염리동", "합정동" ];
-         var 서대문 = [ "남가좌동", "북가좌동", "신촌동", "연희동", "천연동", "홍은동", "홍제동" ];
-         var 서초 = [ "반포동", "방배동", "서초동", "양재동", "잠원동" ];
-         var 성동 = [ "금호동", "마장동", "사근동", "성수동", "옥수동", "왕십리동", "용답동", "행당동" ];
-         var 성북 = [ "길음동", "동선동", "보문동", "삼선동", "석관동", "성북동", "안암동", "월곡동",
-               "장위동", "정릉동", "종암동" ];
-         var 송파 = [ "가락동", "거여동", "마천동", "문정동", "방이동", "삼전동", "석촌동", "송파동",
-               "오금동", "잠실동", "장지동", "풍납동" ];
-         var 양천 = [ "목동", "신월동", "신정동" ];
-         var 영등포 = [ "당산동", "대림동", "문래동", "신길동", "양평동", "영등포동" ];
-         var 용산 = [ "남영동", "용문동", "원효로동", "이촌동", "이태원동", "청파동", "한강로동",
-               "한남동", "후암동" ];
-         var 은평 = [ "갈현동", "대조동", "불광동", "수색동", "신사동", "응암동", "증산동" ];
-         var 종로 = [ "가회동", "사직동", "삼청동", "숭인동", "이화동", "종로5.6가동", "창신동",
-               "청운효자동", "평창동" ];
-         var 중 = [ "다산동", "동화동", "명동", "신당동", "약수동", "중림동", "청구동", "황학동",
-               "회현동" ];
-         var 중랑 = [ "망우본동", "면목동", "묵동", "상봉동", "신내동", "중화동" ];
-
-         var selectCity = $("#select1").val();
-
-         var changeCity;
-
-         if (selectCity == "강남구") {
-            changeCity = 강남;
-         } else if (selectCity == "강동구") {
-            changeCity = 강동;
-         } else if (selectCity == "강북구") {
-            changeCity = 강북;
-         } else if (selectCity == "강서구") {
-            changeCity = 강서;
-         } else if (selectCity == "관악구") {
-            changeCity = 관악;
-         } else if (selectCity == "광진구") {
-            changeCity = 광진;
-         } else if (selectCity == "구로구") {
-            changeCity = 구로;
-         } else if (selectCity == "금천구") {
-            changeCity = 금천;
-         } else if (selectCity == "노원구") {
-            changeCity = 노원;
-         } else if (selectCity == "도봉구") {
-            changeCity = 도봉;
-         } else if (selectCity == "동대문구") {
-            changeCity = 동대문;
-         } else if (selectCity == "동작구") {
-            changeCity = 동작구;
-         } else if (selectCity == "마포구") {
-            changeCity = 마포구;
-         } else if (selectCity == "서대문구") {
-            changeCity = 서대문;
-         } else if (selectCity == "서초구") {
-            changeCity = 서초;
-         } else if (selectCity == "성동구") {
-            changeCity = 성동;
-            mapSearch3();
-            golmok();
-            getData(false);
-         } else if (selectCity == "성북구") {
-            changeCity = 성북;
-         } else if (selectCity == "송파구") {
-            changeCity = 송파;
-         } else if (selectCity == "양천구") {
-            changeCity = 양천;
-         } else if (selectCity == "영등포구") {
-            changeCity = 영등포;
-         } else if (selectCity == "용산구") {
-            changeCity = 용산;
-         } else if (selectCity == "은평구") {
-            changeCity = 은평;
-         } else if (selectCity == "종로구") {
-            changeCity = 종로;
-         } else if (selectCity == "중구") {
-            changeCity = 중;
-         } else if (selectCity == "중랑구") {
-            changeCity = 중랑;
-         }
-
-         $('#select2').empty();
-
-         for (var count = 0; count < changeCity.length; count++) {
-            var option = $("<option>" + changeCity[count] + "</option>");
-            $('#select2').append(option);
-         }
-
-         //stopRefresh();
-
-      }
-
-      /* var checkFrm = function() {
-       //console.log(document.frm.s.options.length); -옵션의 갯수 나옴
-       //console.log(document.frm.s.options.selectedIndex); 
-       //-선택된 옵션의 위치값
-       var index1 = document.dong.g.options.selectedIndex;
-       var index2 = document.dong.d.options.selectedIndex;
-       console.log(document.dong.g.options[index1].text);
-       console.log(document.dong.d.options[index2].text);
-       };
-       */
-      function mapSearch2() {
-
-         var index1 = document.dong.g.options.selectedIndex;
-         var index2 = document.dong.d.options.selectedIndex;
-         var myAddress = document.dong.g.options[index1].text + " "
-               + document.dong.d.options[index2].text
-
-         // 주소-좌표 변환 객체를 생성합니다
-         var geocoder = new daum.maps.services.Geocoder();
-
-         // 주소로 좌표를 검색합니다
-         geocoder
-               .addressSearch(
-                     myAddress,
-                     function(result, status) {
-
-                        // 정상적으로 검색이 완료됐으면 
-                        if (status === daum.maps.services.Status.OK) {
-
-                           var coords = new daum.maps.LatLng(
-                                 result[0].y, result[0].x);
-
-                           // 결과값으로 받은 위치를 마커로 표시합니다
-                           var marker = new daum.maps.Marker({
-                              map : map,
-                              position : coords
-                           });
-
-                           // 인포윈도우로 장소에 대한 설명을 표시합니다
-                           var infowindow = new daum.maps.InfoWindow(
-                                 {
-                                    content : '<div style="width:150px;text-align:center;padding:6px 0;">여기요 여기</div>'
-                                 });
-                           infowindow.open(map, marker);
-
-                           // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-                           map.setCenter(coords);
-                        }
-                     });
-
-      }
-       
-       
-       function mapSearch3() {
-
-                              var coords = new daum.maps.LatLng(37.558085, 127.042761);
-
-                              // 결과값으로 받은 위치를 마커로 표시합니다
-                              var marker = new daum.maps.Marker({
-                                 map2 : map,
-                                 position : coords
-                              });
-
-                              // 인포윈도우로 장소에 대한 설명을 표시합니다
-                              var infowindow = new daum.maps.InfoWindow(
-                                    {
-                                       content : '<div style="width:150px;text-align:center;padding:6px 0;">여기요 여기</div>'
-                                    });
-                              infowindow.open(map, marker);
-
-                              // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-                              map.setCenter(coords);
-                           }
-       
-function golmok(){
    
-   var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-   mapOption = {
-      center : new daum.maps.LatLng(37.556259, 127.045495), // 지도의 중심좌표
-      level : 6, // 지도의 확대 레벨
-   };
-   
-   var map2 = new daum.maps.Map(mapContainer, mapOption),
-    customOverlay = new daum.maps.CustomOverlay({}),
-    infowindow = new daum.maps.InfoWindow({removable: true});
-   
-       function getData2() {
-            var arrayDong = [];
-            $.getJSON('golmok.json', function(data) {
-               $.each(data, function(i, area) {
-                  arrayDong.push(area);
-               });
-               var areas = getPath2(arrayDong)
-               for (var i = 0, len = areas.length; i < len; i++) {
-                  displayArea(areas[i]);
-               }
-            });
-
-         }
-
-         function getPath2(data) {
-            var area = []
-            for (var i = 0; i < data.length; i++) {
-               var dong = {}
-               name = data[i]["name"];
-               path = data[i]["path"];
-               var posList = []
-               for (var j = 0; j < path.length; j++) {
-                  pos = new daum.maps.LatLng(path[j][0], path[j][1])
-                  posList.push(pos)
-               }
-               dong["name"] = name
-               dong["path"] = posList
-               area.push(dong)
-            }
-
-            return area
-         }
-
-         getData2();
-
-         function displayArea(area) {
-
-            // 지도에 표시할 다각형을 생성합니다
-            var polygon = new daum.maps.Polygon({
-               map : map2,
-               path : area.path, // 그려질 다각형의 좌표 배열입니다
-               strokeWeight : 2, // 선의 두께입니다
-               strokeColor : '#f74e16', // 선의 색깔입니다
-               strokeOpacity : 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-               strokeStyle : 'solid', // 선의 스타일입니다
-               fillColor: '#f2744b', // 채우기 색깔입니다
-                fillOpacity: 0.5 // 채우기 불투명도 입니다
-            });
-
-            //#A2FF99
-            // 다각형에 마우스오버 이벤트가 발생했을 때 변경할 채우기 옵션입니다
-            var mouseoverOption = {
-               fillColor : '#e5da10', // 채우기 색깔입니다
-               fillOpacity : 0.5
-            // 채우기 불투명도 입니다        
-            };
-
-            // 다각형에 마우스아웃 이벤트가 발생했을 때 변경할 채우기 옵션입니다
-            var mouseoutOption = {
-               fillColor : '#EFFFED', // 채우기 색깔입니다 
-               fillOpacity : 0.3
-            // 채우기 불투명도 입니다        
-            };
-
-            // 다각형에 마우스오버 이벤트를 등록합니다
-            daum.maps.event.addListener(polygon, 'mouseover', function() {
-
-               // 다각형의 채우기 옵션을 변경합니다
-               polygon.setOptions(mouseoverOption);
-
-            });
-
-            daum.maps.event.addListener(polygon, 'mouseout', function() {
-
-               // 다각형의 채우기 옵션을 변경합니다
-               polygon.setOptions(mouseoutOption);
-
-            });
-
-            //다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
-            daum.maps.event
-                  .addListener(
-                        polygon,
-                        'click',
-                        function(mouseEvent) {
-                           var content = '<div class="info">'
-                                 + '   <div class="title">'
-                                 + '<strong>상권 명 :</strong> ???'
-                                 + '</div>'
-                                 + '   <div class="size"><strong>상권 경쟁 지수 :</strong> ?????'
-                                 + '</div>';
-
-                           infowindow.setContent(content);
-                           infowindow.setPosition(mouseEvent.latLng);
-                           infowindow.setMap(map);
-                        });
-         }
-}
-
-
-      //=============================================================================================================
-      //=============================================================================================================
-
-      function foodChange() {
-
-         var korea = [ "분식", "백반", "국수" ];
-         var china = [ "짜장면", "딤섬", "양꼬치" ];
-         var japan = [ "스시", "라멘", "돈부리" ];
-
-         var selectFood = $("#select3").val();
-
-         var changeFood;
-
-         if (selectFood == "한 식") {
-            changeFood = korea;
-         } else if (selectFood == "중 식") {
-            changeFood = china;
-         } else if (selectFood == "일 식") {
-            changeFood = japan;
-         }
-
-         $('#select4').empty();
-
-         for (var count = 0; count < changeFood.length; count++) {
-            var option = $("<option>" + changeFood[count] + "</option>");
-            $('#select4').append(option);
-         }
-
-      }
-   </script>
-</body>
-</html>
