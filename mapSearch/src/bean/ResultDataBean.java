@@ -3,8 +3,8 @@ package bean;
 public class ResultDataBean {
 	private String dong;
 	private String service;
-	private float sales;
-	private float percentage;
+	private int sales;
+	private int percentage;
 	private String estimatedClass;
 
 	public ResultDataBean() {
@@ -26,19 +26,19 @@ public class ResultDataBean {
 		this.service = service;
 	}
 
-	public float getSales() {
+	public int getSales() {
 		return sales;
 	}
 
-	public void setSales(float sales) {
+	public void setSales(int sales) {
 		this.sales = sales;
 	}
 
-	public float getPercentage() {
+	public int getPercentage() {
 		return percentage;
 	}
 
-	public void setPercentage(float percentage) {
+	public void setPercentage(int percentage) {
 		this.percentage = percentage;
 	}
 

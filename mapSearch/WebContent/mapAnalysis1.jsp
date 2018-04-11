@@ -49,11 +49,8 @@
 		</div>
 	</nav>
 
-	<c:forEach items="${sessionScope.area}" var="dataAll">
-		<%
-			
-		%>
-	</c:forEach>
+
+
 	<!-- Page Content -->
 	<div class="container">
 
@@ -72,7 +69,9 @@
 				<p>
 					해당상권의<br> <font color="#1f72ef">${sessionScope.service}</font>업종<br>
 					전국 외식업 골목상권 기준 상위<font color="#1f72ef"> ${sessionScope.result.percentage}%</font><br>
-					상권 안전도 : ${sessionScope.result.estimatedClass}
+					상권 안전도 : ${sessionScope.result.estimatedClass}<br>
+					${sessionScope.area14.totalPeople}
+					
 
 				</p>
 				<a class="btn btn-primary btn-lg" href="report.jsp">상권 통계 분석 더보기</a>
@@ -319,7 +318,6 @@
 								infowindow.setMap(map);
 							});
 		}
-
 		//=============================================================================================================
 		//=============================================================================================================
 		mapSearch()
@@ -368,8 +366,8 @@
 
 		data = [ {
 			type : 'scatterpolar',
-			r : [ 50, 40, 50, 35, 40, 50 ],
-			theta : [ '성장성', '구매력', '유동성', '집객력', '수익성', '성장성' ],
+			r : [('${sessionScope.area14.totalNearPeople}'/10000)*100, ('${sessionScope.area14.avgOutcome}'/1500000000)*100, ('${sessionScope.area14.totalPeople}'/10000)*100, ('${sessionScope.area14.totalFacility}'/35000)*100, ('${sessionScope.area14.totalNearFacility}'/400)*100, ('${sessionScope.area14.totalNearPeople}'/10000)*100 ],
+			theta : [ '배후지유동인구', '구매력', '유동인구', '주변시설', '배후지시설', '배후지유동인구' ],
 			fill : 'toself'
 		} ]
 
@@ -377,13 +375,14 @@
 			polar : {
 				radialaxis : {
 					visible : true,
-					range : [ 0, 50 ]
+					range : [ 0, 100 ]
 				}
 			},
 			showlegend : false
 		}
 
 		Plotly.plot("myDiv", data, layout)
+		
 	</script>
 
 
