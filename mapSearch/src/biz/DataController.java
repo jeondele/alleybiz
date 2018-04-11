@@ -16,6 +16,7 @@ import bean.AlleyDataBean;
 import bean.DongDataBean;
 import bean.ResultBean;
 import bean.ResultDataBean;
+import bean.StoreSales;
 import model.DataDAO;
 import model.GetAreaCode;
 import model.GetDongData;
@@ -47,10 +48,16 @@ public class DataController extends HttpServlet {
 			if (codeList.size() > 0) {
 				ArrayList<AlleyDataBean> area = getAreaData(codeList);
 				ResultDataBean result = getResult(dong, service, codeList);
-				ArrayList<DongDataBean> datas = getDongData(dong, area);
+				ArrayList<StoreSales> sData = getSData(codeList, service);
+				ArrayList<DongDataBean> datas = getDongData(dong, sData, area);
 
 				for (int i = 0; i < datas.size(); i++) {
-					request.getSession().setAttribute(String.format("area%d", i), datas.get(i));
+					if (datas.get(i) == null) {
+						datas.get(i - 1);
+					} else {
+						request.getSession().setAttribute(String.format("area%d", i), datas.get(i));
+					}
+
 				}
 
 				request.getSession().setAttribute("result", result);
@@ -58,7 +65,8 @@ public class DataController extends HttpServlet {
 				ArrayList<String> surCodeList = getSurAreaCode(gu, dong);
 				ArrayList<AlleyDataBean> area = getAreaData(surCodeList);
 				ResultDataBean result = getResult(dong, service, codeList);
-				ArrayList<DongDataBean> datas = getDongData(dong, area);
+				ArrayList<StoreSales> sData = getSData(codeList, service);
+				ArrayList<DongDataBean> datas = getDongData(dong, sData, area);
 
 				for (int i = 0; i < datas.size(); i++) {
 					request.getSession().setAttribute(String.format("area%d", i), datas.get(i));
@@ -166,9 +174,54 @@ public class DataController extends HttpServlet {
 		return area;
 	}
 
-	public static ArrayList<DongDataBean> getDongData(String dong, ArrayList<AlleyDataBean> area) {
-		ArrayList<DongDataBean> dongData = GetDongData.getDongData(dong, area);
+	public static ArrayList<DongDataBean> getDongData(String dong, ArrayList<StoreSales> sData,
+			ArrayList<AlleyDataBean> area) {
+		ArrayList<DongDataBean> dongData = GetDongData.getDongData(dong, sData, area);
 		return dongData;
+	}
+
+	@SuppressWarnings("null")
+	public static ArrayList<StoreSales> getSData(ArrayList<String> codeList, String service) {
+		ArrayList<StoreSales> sData = null;
+		String serviceCode;
+		if (service.equals("한식")) {
+			serviceCode = "CS100001";
+		} else if (service.equals("중식")) {
+			serviceCode = "CS100002";
+		} else if (service.equals("일식")) {
+			serviceCode = "CS100003";
+		} else if (service.equals("양식")) {
+			serviceCode = "CS100004";
+		} else if (service.equals("분식")) {
+			serviceCode = "CS100005";
+		} else if (service.equals("패스트푸드")) {
+			serviceCode = "CS100006";
+		} else if (service.equals("치킨")) {
+			serviceCode = "CS100007";
+		} else if (service.equals("제과")) {
+			serviceCode = "CS100008";
+		} else if (service.equals("커피·음료")) {
+			serviceCode = "CS100009";
+		} else if (service.equals("호프·간이주점")) {
+			serviceCode = "CS100010";
+		} else {
+			serviceCode = "0";
+		}
+
+		try {
+			for (String code : codeList) {
+				code = code + ".0";
+				ArrayList<StoreSales> s = DataDAO.selectStoreSales(code, serviceCode);
+				if (s.size() > 0) {
+					sData.addAll(s);
+				} else {
+				}
+			}
+			return sData;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public static ResultDataBean getResult(String dong, String service, ArrayList<String> codeList) {
