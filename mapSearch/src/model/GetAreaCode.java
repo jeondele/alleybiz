@@ -12,7 +12,7 @@ public class GetAreaCode {
 		ArrayList<String[]> dataList = new ArrayList<>();
 		try {
 			BufferedReader in = new BufferedReader(
-					new FileReader("C:\\0.bigData\\alleybiz\\mapSearch\\WebContent\\code.csv"));
+					new FileReader("C:\\Users\\user\\git\\alleybiz\\mapSearch\\WebContent\\code.csv"));
 			String value = in.readLine();
 			while (value != null) {
 				String[] split = value.split(",");
