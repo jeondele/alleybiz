@@ -3,17 +3,17 @@ package bean;
 public class AlleyDataBean {
 	private String date;
 	private String areaCode;
-	private float totalPeople;
-	private float totalNearPeople;
-	private float totalBizman;
-	private float totalNearBizman;
-	private float totalLivingPeople;
-	private float avgOutcome;
-	private float avgIncome;
-	private float avgNearIcome;
-	private float avgNearOutcome;
-	private float totalFacility;
-	private float totalNearFacility;
+	private int totalPeople;
+	private int totalNearPeople;
+	private int totalBizman;
+	private int totalNearBizman;
+	private int totalLivingPeople;
+	private int avgOutcome;
+	private int avgIncome;
+	private int avgNearIcome;
+	private int avgNearOutcome;
+	private int totalFacility;
+	private int totalNearFacility;
 
 	public AlleyDataBean() {
 
@@ -35,92 +35,92 @@ public class AlleyDataBean {
 		this.areaCode = areaCode;
 	}
 
-	public float getTotalPeople() {
+	public int getTotalPeople() {
 		return totalPeople;
 	}
 
 	public void setTotalPeople(float totalPeople) {
-		this.totalPeople = totalPeople;
+		this.totalPeople = Math.round(totalPeople);
 	}
 
-	public float getTotalNearPeople() {
+	public int getTotalNearPeople() {
 		return totalNearPeople;
 	}
 
 	public void setTotalNearPeople(float totalNearPeople) {
-		this.totalNearPeople = totalNearPeople;
+		this.totalNearPeople = Math.round(totalNearPeople);
 	}
 
-	public float getTotalBizman() {
+	public int getTotalBizman() {
 		return totalBizman;
 	}
 
 	public void setTotalBizman(float totalBizman) {
-		this.totalBizman = totalBizman;
+		this.totalBizman = Math.round(totalBizman);
 	}
 
-	public float getTotalNearBizman() {
+	public int getTotalNearBizman() {
 		return totalNearBizman;
 	}
 
 	public void setTotalNearBizman(float totalNearBizman) {
-		this.totalNearBizman = totalNearBizman;
+		this.totalNearBizman =Math.round(totalNearBizman);
 	}
 
-	public float getTotalLivingPeople() {
+	public int getTotalLivingPeople() {
 		return totalLivingPeople;
 	}
 
 	public void setTotalLivingPeople(float totalLivingPeople) {
-		this.totalLivingPeople = totalLivingPeople;
+		this.totalLivingPeople = Math.round(totalLivingPeople);
 	}
 
-	public float getAvgIncome() {
+	public int getAvgIncome() {
 		return avgIncome;
 	}
 
 	public void setAvgIncome(float avgIncome) {
-		this.avgIncome = avgIncome;
+		this.avgIncome = Math.round(avgIncome);
 	}
 
-	public float getAvgOutcome() {
+	public int getAvgOutcome() {
 		return avgOutcome;
 	}
 
 	public void setAvgOutcome(float avgOutcome) {
-		this.avgOutcome = avgOutcome;
+		this.avgOutcome = Math.round(avgOutcome);
 	}
 
-	public float getTotalFacility() {
+	public int getTotalFacility() {
 		return totalFacility;
 	}
 
 	public void setTotalFacility(float totalFacility) {
-		this.totalFacility = totalFacility;
+		this.totalFacility = Math.round(totalFacility);
 	}
 
-	public float getTotalNearFacility() {
+	public int getTotalNearFacility() {
 		return totalNearFacility;
 	}
 
 	public void setTotalNearFacility(float totalNearFacility) {
-		this.totalNearFacility = totalNearFacility;
+		this.totalNearFacility = Math.round(totalNearFacility);
 	}
 
-	public float getAvgNearIcome() {
+	public int getAvgNearIcome() {
 		return avgNearIcome;
 	}
 
 	public void setAvgNearIcome(float avgNearIcome) {
-		this.avgNearIcome = avgNearIcome;
+		this.avgNearIcome = Math.round(avgNearIcome);
 	}
 
-	public float getAvgNearOutcome() {
+	public int getAvgNearOutcome() {
 		return avgNearOutcome;
 	}
 
 	public void setAvgNearOutcome(float avgNearOutcome) {
-		this.avgNearOutcome = avgNearOutcome;
+		this.avgNearOutcome = Math.round(avgNearOutcome);
 	}
 
 }

@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import bean.AlleyDataBean;
 import bean.DongDataBean;
-import bean.ResultBean;
+import bean.StoreSales;
 
 public class GetDongData {
 
-	public static ArrayList<DongDataBean> getDongData(String dong, ArrayList<AlleyDataBean> areaData) {
+	public static ArrayList<DongDataBean> getDongData(String dong, ArrayList<StoreSales> sData,
+			ArrayList<AlleyDataBean> areaData) {
 		ArrayList<DongDataBean> dongData = new ArrayList<>();
 		DongDataBean dongData1606 = new DongDataBean();
 		DongDataBean dongData1607 = new DongDataBean();
@@ -25,7 +26,20 @@ public class GetDongData {
 		DongDataBean dongData1706 = new DongDataBean();
 		DongDataBean dongData1707 = new DongDataBean();
 		DongDataBean dongData1708 = new DongDataBean();
-		for (AlleyDataBean alley : areaData) {
+		int len = areaData.size();
+
+		for (int i = 0; i < len; i++) {
+
+			AlleyDataBean alley = areaData.get(i);
+			StoreSales s = sData.get(i);
+			if (alley == null) {
+				alley = areaData.get(i - 1);
+			}
+
+			if (s == null) {
+				s = sData.get(i - 1);
+			}
+
 			if (alley.getDate().equals("201606.0")) {
 				dongData1606.setDate("201606.0");
 				dongData1606.setDong(dong);
@@ -40,6 +54,8 @@ public class GetDongData {
 				dongData1606.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1606.setTotalFacility(alley.getTotalFacility());
 				dongData1606.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1606.setSales(s.getSales());
+				dongData1606.setStores(s.getStores());
 
 			} else if (alley.getDate().equals("201607.0")) {
 				dongData1607.setDate("201607.0");
@@ -55,6 +71,8 @@ public class GetDongData {
 				dongData1607.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1607.setTotalFacility(alley.getTotalFacility());
 				dongData1607.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1607.setSales(sData.get(i).getSales());
+				dongData1607.setStores(sData.get(i).getStores());
 
 			} else if (alley.getDate().equals("201608.0")) {
 				dongData1608.setDate("201608.0");
@@ -70,6 +88,8 @@ public class GetDongData {
 				dongData1608.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1608.setTotalFacility(alley.getTotalFacility());
 				dongData1608.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1608.setSales(sData.get(i).getSales());
+				dongData1608.setStores(sData.get(i).getStores());
 
 			} else if (alley.getDate().equals("201609.0")) {
 				dongData1609.setDate("201609.0");
@@ -85,6 +105,8 @@ public class GetDongData {
 				dongData1609.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1609.setTotalFacility(alley.getTotalFacility());
 				dongData1609.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1609.setSales(sData.get(i).getSales());
+				dongData1609.setStores(sData.get(i).getStores());
 
 			} else if (alley.getDate().equals("201610.0")) {
 				dongData1610.setDate("201610.0");
@@ -100,6 +122,8 @@ public class GetDongData {
 				dongData1610.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1610.setTotalFacility(alley.getTotalFacility());
 				dongData1610.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1610.setSales(sData.get(i).getSales());
+				dongData1610.setStores(sData.get(i).getStores());
 
 			} else if (alley.getDate().equals("201611.0")) {
 				dongData1611.setDate("201611.0");
@@ -115,6 +139,8 @@ public class GetDongData {
 				dongData1611.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1611.setTotalFacility(alley.getTotalFacility());
 				dongData1611.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1611.setSales(sData.get(i).getSales());
+				dongData1611.setStores(sData.get(i).getStores());
 
 			} else if (alley.getDate().equals("201612.0")) {
 				dongData1612.setDate("201612.0");
@@ -130,6 +156,8 @@ public class GetDongData {
 				dongData1612.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1612.setTotalFacility(alley.getTotalFacility());
 				dongData1612.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1612.setSales(sData.get(i).getSales());
+				dongData1612.setStores(sData.get(i).getStores());
 
 			} else if (alley.getDate().equals("201701.0")) {
 				dongData1701.setDate("201701.0");
@@ -145,6 +173,8 @@ public class GetDongData {
 				dongData1701.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1701.setTotalFacility(alley.getTotalFacility());
 				dongData1701.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1701.setSales(sData.get(i).getSales());
+				dongData1701.setStores(sData.get(i).getStores());
 
 			} else if (alley.getDate().equals("201702.0")) {
 				dongData1702.setDate("201702.0");
@@ -160,6 +190,8 @@ public class GetDongData {
 				dongData1702.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1702.setTotalFacility(alley.getTotalFacility());
 				dongData1702.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1702.setSales(sData.get(i).getSales());
+				dongData1702.setStores(sData.get(i).getStores());
 
 			} else if (alley.getDate().equals("201703.0")) {
 				dongData1703.setDate("201703.0");
@@ -175,6 +207,8 @@ public class GetDongData {
 				dongData1703.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1703.setTotalFacility(alley.getTotalFacility());
 				dongData1703.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1703.setSales(sData.get(i).getSales());
+				dongData1703.setStores(sData.get(i).getStores());
 
 			} else if (alley.getDate().equals("201704.0")) {
 				dongData1704.setDate("201704.0");
@@ -190,6 +224,8 @@ public class GetDongData {
 				dongData1704.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1704.setTotalFacility(alley.getTotalFacility());
 				dongData1704.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1704.setSales(sData.get(i).getSales());
+				dongData1704.setStores(sData.get(i).getStores());
 
 			} else if (alley.getDate().equals("201705.0")) {
 				dongData1705.setDate("201705.0");
@@ -205,6 +241,8 @@ public class GetDongData {
 				dongData1705.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1705.setTotalFacility(alley.getTotalFacility());
 				dongData1705.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1705.setSales(sData.get(i).getSales());
+				dongData1705.setStores(sData.get(i).getStores());
 
 			} else if (alley.getDate().equals("201706.0")) {
 				dongData1706.setDate("201706.0");
@@ -220,6 +258,9 @@ public class GetDongData {
 				dongData1706.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1706.setTotalFacility(alley.getTotalFacility());
 				dongData1706.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1706.setSales(sData.get(i).getSales());
+				dongData1706.setStores(sData.get(i).getStores());
+
 			} else if (alley.getDate().equals("201707.0")) {
 				dongData1707.setDate("201707.0");
 				dongData1707.setDong(dong);
@@ -234,6 +275,9 @@ public class GetDongData {
 				dongData1707.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1707.setTotalFacility(alley.getTotalFacility());
 				dongData1707.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1707.setSales(sData.get(i).getSales());
+				dongData1707.setStores(sData.get(i).getStores());
+
 			} else if (alley.getDate().equals("201708.0")) {
 				dongData1708.setDate("201708.0");
 				dongData1708.setDong(dong);
@@ -248,6 +292,8 @@ public class GetDongData {
 				dongData1708.setAvgNearOutcome(alley.getAvgNearOutcome());
 				dongData1708.setTotalFacility(alley.getTotalFacility());
 				dongData1708.setTotalNearFacility(alley.getTotalNearFacility());
+				dongData1708.setSales(sData.get(i).getSales());
+				dongData1708.setStores(sData.get(i).getStores());
 			}
 
 		}
@@ -269,6 +315,5 @@ public class GetDongData {
 
 		return dongData;
 	}
-
 
 }

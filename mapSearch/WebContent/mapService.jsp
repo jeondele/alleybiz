@@ -475,7 +475,7 @@ div.check {
 									map.setCenter(coords);
 								}
 							});
-			sendData(myAddress);
+		
 
 		}
 		function sendData(data) {
@@ -488,7 +488,7 @@ div.check {
 			xhttp2.open("POST", "data", true);
 			xhttp2.setRequestHeader("Content-type",
 					"application/x-www-form-urlencoded");
-			xhttp2.send("msg=" + data);
+			xhttp2.send("areaCode=" + data);
 
 		}
 		//=============================================================================================================
@@ -989,7 +989,7 @@ div.check {
 						displayArea(areas[i]);
 					}
 				});
-
+			
 			}
 
 			function getPath2(data) {
