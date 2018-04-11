@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import bean.AlleyDataBean;
 import bean.ResultBean;
+import bean.StoreSales;
 import util.DBUtil;
 
 public class DataDAO {
@@ -83,4 +84,34 @@ public class DataDAO {
 		}
 	}
 
+	public static ArrayList<StoreSales> selectStoreSales(String areaCode, String serviceCode) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<StoreSales> all = null;
+
+		try {
+			conn = DBUtil.getConnection();
+			pstmt = conn.prepareStatement(sql.getString("selectStoreSales"));
+			pstmt.setString(1, areaCode);
+			pstmt.setString(2, serviceCode);
+			rset = pstmt.executeQuery();
+			all = new ArrayList<>();
+
+			while (rset.next()) {
+				StoreSales result = new StoreSales();
+				result.setAreaCode(rset.getString(1));
+				result.setServiceCode(rset.getString(2));
+				result.setSales(rset.getFloat(3));
+				result.setStores(rset.getFloat(4));
+				all.add(result);
+			}
+			if (all.size() != 0) {
+				return all;
+			}
+			return null;
+		} finally {
+			DBUtil.close(conn, pstmt, rset);
+		}
+	}
 }

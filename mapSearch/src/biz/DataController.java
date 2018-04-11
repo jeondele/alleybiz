@@ -44,7 +44,7 @@ public class DataController extends HttpServlet {
 
 		} else {
 			ArrayList<String> codeList = getAreaCode(dong);
-			if (codeList.size() >= 1) {
+			if (codeList.size() > 0) {
 				ArrayList<AlleyDataBean> area = getAreaData(codeList);
 				ResultDataBean result = getResult(dong, service, codeList);
 				ArrayList<DongDataBean> datas = getDongData(dong, area);
