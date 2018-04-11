@@ -45,7 +45,7 @@
 
      /*  ##############세션에 저장된 ArrayList 확인 ###################### */
     //alert(charData);
-    
+
     function drawChart1() {
  
         // Create the data table.

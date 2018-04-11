@@ -34,7 +34,6 @@ public class DataController extends HttpServlet {
 		String dong = request.getParameter("d");
 		String gu = request.getParameter("g");
 		String service = request.getParameter("service");
-	
 
 		if (dong == null) {
 			request.getSession().setAttribute("areaCheck", "block");
@@ -45,28 +44,43 @@ public class DataController extends HttpServlet {
 
 		} else {
 			ArrayList<String> codeList = getAreaCode(dong);
-			ArrayList<AlleyDataBean> area = getAreaData(codeList);
-			ResultDataBean result = getResult(dong, service, codeList);
-			ArrayList<DongDataBean> datas = getDongData(dong, area);
+			if (codeList.size() >= 1) {
+				ArrayList<AlleyDataBean> area = getAreaData(codeList);
+				ResultDataBean result = getResult(dong, service, codeList);
+				ArrayList<DongDataBean> datas = getDongData(dong, area);
 
-			for(int i=0; i<datas.size(); i++) {
-				request.getSession().setAttribute(String.format("area%d",i),datas.get(i));
+				for (int i = 0; i < datas.size(); i++) {
+					request.getSession().setAttribute(String.format("area%d", i), datas.get(i));
+				}
+
+				request.getSession().setAttribute("result", result);
+			} else {
+				ArrayList<String> surCodeList = getSurAreaCode(gu, dong);
+				ArrayList<AlleyDataBean> area = getAreaData(surCodeList);
+				ResultDataBean result = getResult(dong, service, codeList);
+				ArrayList<DongDataBean> datas = getDongData(dong, area);
+
+				for (int i = 0; i < datas.size(); i++) {
+					request.getSession().setAttribute(String.format("area%d", i), datas.get(i));
+				}
+
+				request.getSession().setAttribute("result", result);
 			}
-			
+
 			request.getSession().setAttribute("gu", gu);
 			request.getSession().setAttribute("dong", dong);
 			request.getSession().setAttribute("service", service);
-			request.getSession().setAttribute("result", result);
+
 			response.sendRedirect("mapAnalysis.jsp");
 
 		}
 
 	}
 
-	public static ArrayList<ArrayList<String>> getSurAreaCode(String gu, String dong) {
+	public static ArrayList<String> getSurAreaCode(String gu, String dong) {
 		ArrayList<String[]> file;
 		HashMap<String, ArrayList<String>> guMap;
-		ArrayList<ArrayList<String>> codeList = new ArrayList<>();
+		ArrayList<String> codeList = new ArrayList<>();
 		try {
 
 			file = GetAreaCode.getDataList();
@@ -78,7 +92,11 @@ public class DataController extends HttpServlet {
 
 				} else {
 					ArrayList<String> codes = GetAreaCode.convertD2C(guMap, dong);
-					codeList.add(codes);
+					if (codes.size() > 0) {
+						codeList.addAll(codes);
+					} else {
+
+					}
 
 				}
 			}
@@ -104,7 +122,7 @@ public class DataController extends HttpServlet {
 
 		return codeList;
 	}
-	
+
 	public static ArrayList<AlleyDataBean> getAreaData(ArrayList<String> codeList) {
 		ArrayList<AlleyDataBean> area = new ArrayList<>();
 		ArrayList<AlleyDataBean> data;
@@ -112,7 +130,12 @@ public class DataController extends HttpServlet {
 			try {
 				code = code + ".0";
 				data = DataDAO.selectArea(code);
-				area.addAll(data);
+				if (data == null) {
+
+				} else {
+					area.addAll(data);
+				}
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -128,6 +151,11 @@ public class DataController extends HttpServlet {
 			for (String code : codes) {
 				try {
 					data = DataDAO.selectArea(code);
+					if (data.size() > 0) {
+						area.addAll(data);
+					} else {
+
+					}
 					area.addAll(data);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -137,7 +165,7 @@ public class DataController extends HttpServlet {
 		}
 		return area;
 	}
-	
+
 	public static ArrayList<DongDataBean> getDongData(String dong, ArrayList<AlleyDataBean> area) {
 		ArrayList<DongDataBean> dongData = GetDongData.getDongData(dong, area);
 		return dongData;
@@ -180,24 +208,27 @@ public class DataController extends HttpServlet {
 				code = code + ".0";
 				ResultBean tmp = new ResultBean();
 				tmp = DataDAO.selectResult(code, serviceCode);
-				per += tmp.getPercentage();
-				sales += tmp.getSales();
-				String classValue = tmp.getEstimatedClass();
-				if (classes.containsKey(classValue)) {
-					int val = classes.get(classValue);
-					val += 1;
-					classes.put(classValue, val);
+				if (tmp == null) {
 				} else {
-					classes.put(classValue, 1);
-				}
+					per += tmp.getPercentage();
+					sales += tmp.getSales();
+					String classValue = tmp.getEstimatedClass();
+					if (classes.containsKey(classValue)) {
+						int val = classes.get(classValue);
+						val += 1;
+						classes.put(classValue, val);
+					} else {
+						classes.put(classValue, 1);
+					}
 
+				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		per = per / len;
-		per=per*100;
+		per = per * 100;
 		sales = sales / len;
 		Set<String> keys = classes.keySet();
 		int value = 0;
