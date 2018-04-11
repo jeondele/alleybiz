@@ -1,15 +1,8 @@
 package bean;
 
 public class AlleyDataBean {
-
 	private String date;
-	private String gu;
-	private String dong;
 	private String areaCode;
-	private String serviceCode;
-	private float totalNearStore;
-	private float totalStore;
-	private float avgNearMonth;
 	private float totalPeople;
 	private float totalNearPeople;
 	private float totalBizman;
@@ -17,49 +10,10 @@ public class AlleyDataBean {
 	private float totalLivingPeople;
 	private float avgOutcome;
 	private float avgIncome;
+	private float avgNearIcome;
+	private float avgNearOutcome;
 	private float totalFacility;
 	private float totalNearFacility;
-	private float sales;
-
-	public String getServiceCode() {
-		return serviceCode;
-	}
-
-	public void setServiceCode(String serviceCode) {
-		this.serviceCode = serviceCode;
-	}
-
-	public float getTotalNearStore() {
-		return totalNearStore;
-	}
-
-	public void setTotalNearStore(float totalNearStore) {
-		this.totalNearStore = totalNearStore;
-	}
-
-	public float getTotalStore() {
-		return totalStore;
-	}
-
-	public void setTotalStore(float totalStore) {
-		this.totalStore = totalStore;
-	}
-
-	public float getAvgNearMonth() {
-		return avgNearMonth;
-	}
-
-	public void setAvgNearMonth(float avgNearMonth) {
-		this.avgNearMonth = avgNearMonth;
-	}
-
-	public float getSales() {
-		return sales;
-	}
-
-	public void setSales(float sales) {
-		this.sales = sales;
-	}
 
 	public AlleyDataBean() {
 
@@ -79,22 +33,6 @@ public class AlleyDataBean {
 
 	public void setAreaCode(String areaCode) {
 		this.areaCode = areaCode;
-	}
-
-	public String getGu() {
-		return gu;
-	}
-
-	public void setGu(String gu) {
-		this.gu = gu;
-	}
-
-	public String getDong() {
-		return dong;
-	}
-
-	public void setDong(String dong) {
-		this.dong = dong;
 	}
 
 	public float getTotalPeople() {
@@ -167,6 +105,22 @@ public class AlleyDataBean {
 
 	public void setTotalNearFacility(float totalNearFacility) {
 		this.totalNearFacility = totalNearFacility;
+	}
+
+	public float getAvgNearIcome() {
+		return avgNearIcome;
+	}
+
+	public void setAvgNearIcome(float avgNearIcome) {
+		this.avgNearIcome = avgNearIcome;
+	}
+
+	public float getAvgNearOutcome() {
+		return avgNearOutcome;
+	}
+
+	public void setAvgNearOutcome(float avgNearOutcome) {
+		this.avgNearOutcome = avgNearOutcome;
 	}
 
 }
