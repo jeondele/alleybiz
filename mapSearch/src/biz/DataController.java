@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.AlleyDataBean;
 import bean.DongDataBean;
+import bean.ResultBean;
+import bean.ResultDataBean;
 import model.DataDAO;
 import model.GetAreaCode;
 import model.GetDongData;
@@ -31,30 +34,33 @@ public class DataController extends HttpServlet {
 		String dong = request.getParameter("d");
 		String gu = request.getParameter("g");
 		String service = request.getParameter("service");
-		System.out.println(service);
+	
 
 		if (dong == null) {
 			request.getSession().setAttribute("areaCheck", "block");
 			response.sendRedirect("mapService.jsp");
-		} else if (service.length()<2) {
+		} else if (service.length() < 2) {
 			request.getSession().setAttribute("serviceCheck", "block");
 			response.sendRedirect("mapService.jsp");
 
 		} else {
-			System.out.println(dong);
 			ArrayList<String> codeList = getAreaCode(dong);
 			ArrayList<AlleyDataBean> area = getAreaData(codeList);
-			request.getSession().setAttribute("area", area);
+			ResultDataBean result = getResult(dong, service, codeList);
+			ArrayList<DongDataBean> datas = getDongData(dong, area);
+
+			for(int i=0; i<datas.size(); i++) {
+				request.getSession().setAttribute(String.format("area%d",i),datas.get(i));
+			}
+			
+			request.getSession().setAttribute("gu", gu);
+			request.getSession().setAttribute("dong", dong);
+			request.getSession().setAttribute("service", service);
+			request.getSession().setAttribute("result", result);
 			response.sendRedirect("mapAnalysis.jsp");
-		
+
 		}
 
-		
-	}
-
-	public static ArrayList<DongDataBean> getDongData(String dong, ArrayList<AlleyDataBean> area) {
-		ArrayList<DongDataBean> dongData = GetDongData.getDongData(dong, area);
-		return dongData;
 	}
 
 	public static ArrayList<ArrayList<String>> getSurAreaCode(String gu, String dong) {
@@ -77,7 +83,6 @@ public class DataController extends HttpServlet {
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			codeList = null;
 		}
@@ -93,22 +98,21 @@ public class DataController extends HttpServlet {
 			codeList = GetAreaCode.convertD2C(dongMap, dong);
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			codeList = null;
 		}
 
 		return codeList;
 	}
-
+	
 	public static ArrayList<AlleyDataBean> getAreaData(ArrayList<String> codeList) {
 		ArrayList<AlleyDataBean> area = new ArrayList<>();
-		AlleyDataBean data = null;
+		ArrayList<AlleyDataBean> data;
 		for (String code : codeList) {
 			try {
-				code=code+".0";
+				code = code + ".0";
 				data = DataDAO.selectArea(code);
-				area.add(data);
+				area.addAll(data);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -119,12 +123,12 @@ public class DataController extends HttpServlet {
 
 	public static ArrayList<AlleyDataBean> getSurAreaData(ArrayList<ArrayList<String>> codeList) {
 		ArrayList<AlleyDataBean> area = new ArrayList<>();
-		AlleyDataBean data = null;
+		ArrayList<AlleyDataBean> data = null;
 		for (ArrayList<String> codes : codeList) {
 			for (String code : codes) {
 				try {
 					data = DataDAO.selectArea(code);
-					area.add(data);
+					area.addAll(data);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -132,5 +136,87 @@ public class DataController extends HttpServlet {
 			}
 		}
 		return area;
+	}
+	
+	public static ArrayList<DongDataBean> getDongData(String dong, ArrayList<AlleyDataBean> area) {
+		ArrayList<DongDataBean> dongData = GetDongData.getDongData(dong, area);
+		return dongData;
+	}
+
+	public static ResultDataBean getResult(String dong, String service, ArrayList<String> codeList) {
+		String serviceCode;
+		ResultDataBean result = new ResultDataBean();
+		int len = codeList.size();
+		HashMap<String, Integer> classes = new HashMap<>();
+		float per = 0;
+		float sales = 0;
+
+		if (service.equals("한식")) {
+			serviceCode = "CS100001";
+		} else if (service.equals("중식")) {
+			serviceCode = "CS100002";
+		} else if (service.equals("일식")) {
+			serviceCode = "CS100003";
+		} else if (service.equals("양식")) {
+			serviceCode = "CS100004";
+		} else if (service.equals("분식")) {
+			serviceCode = "CS100005";
+		} else if (service.equals("패스트푸드")) {
+			serviceCode = "CS100006";
+		} else if (service.equals("치킨")) {
+			serviceCode = "CS100007";
+		} else if (service.equals("제과")) {
+			serviceCode = "CS100008";
+		} else if (service.equals("커피·음료")) {
+			serviceCode = "CS100009";
+		} else if (service.equals("호프·간이주점")) {
+			serviceCode = "CS100010";
+		} else {
+			serviceCode = "0";
+		}
+
+		for (String code : codeList) {
+			try {
+				code = code + ".0";
+				ResultBean tmp = new ResultBean();
+				tmp = DataDAO.selectResult(code, serviceCode);
+				per += tmp.getPercentage();
+				sales += tmp.getSales();
+				String classValue = tmp.getEstimatedClass();
+				if (classes.containsKey(classValue)) {
+					int val = classes.get(classValue);
+					val += 1;
+					classes.put(classValue, val);
+				} else {
+					classes.put(classValue, 1);
+				}
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		per = per / len;
+		per=per*100;
+		sales = sales / len;
+		Set<String> keys = classes.keySet();
+		int value = 0;
+		String estClass = null;
+		for (String k : keys) {
+			int cnt = classes.get(k).intValue();
+			if (value >= cnt) {
+
+			} else {
+				value = cnt;
+				estClass = k;
+			}
+		}
+
+		result.setDong(dong);
+		result.setService(service);
+		result.setSales(sales);
+		result.setPercentage(per);
+		result.setEstimatedClass(estClass);
+		return result;
 	}
 }

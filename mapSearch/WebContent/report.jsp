@@ -47,7 +47,7 @@
     //alert(charData);
     
     function drawChart1() {
-    
+ 
         // Create the data table.
         var data1 = new google.visualization.DataTable();
         data1.addColumn('string', 'date');

@@ -1,30 +1,29 @@
 package bean;
 
-public class ResultBean {
-	private String areaCode;
-	private String serviceCode;
+public class ResultDataBean {
+	private String dong;
+	private String service;
 	private float sales;
 	private float percentage;
 	private String estimatedClass;
 
-	public ResultBean() {
+	public ResultDataBean() {
 	}
 
-	public String getAreaCode() {
-		return areaCode;
+	public String getDong() {
+		return dong;
 	}
 
-	public void setAreaCode(String areaCode) {
-		this.areaCode = areaCode;
+	public void setDong(String dong) {
+		this.dong = dong;
 	}
 
-	
-	public String getServiceCode() {
-		return serviceCode;
+	public String getService() {
+		return service;
 	}
 
-	public void setServiceCode(String serviceCode) {
-		this.serviceCode = serviceCode;
+	public void setService(String service) {
+		this.service = service;
 	}
 
 	public float getSales() {

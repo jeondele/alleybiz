@@ -1,10 +1,8 @@
 package bean;
 
 public class AlleyDataBean {
-	private String areaCode;
 	private String date;
-	private String gu;
-	private String dong;
+	private String areaCode;
 	private float totalPeople;
 	private float totalNearPeople;
 	private float totalBizman;
@@ -27,21 +25,6 @@ public class AlleyDataBean {
 
 	public void setDate(String date) {
 		this.date = date;
-	}
-	public String getGu() {
-		return gu;
-	}
-
-	public void setGu(String gu) {
-		this.gu = gu;
-	}
-
-	public String getDong() {
-		return dong;
-	}
-
-	public void setDong(String dong) {
-		this.dong = dong;
 	}
 
 	public String getAreaCode() {
@@ -103,7 +86,6 @@ public class AlleyDataBean {
 	public float getAvgOutcome() {
 		return avgOutcome;
 	}
-
 
 	public void setAvgOutcome(float avgOutcome) {
 		this.avgOutcome = avgOutcome;
