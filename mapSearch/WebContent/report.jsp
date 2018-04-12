@@ -36,16 +36,7 @@
     google.charts.setOnLoadCallback(drawChart4);
  //   google.charts.setOnLoadCallback(drawChart5);   
 
-    // Callback that creates and populates a data table,
-    // instantiates the pie chart, passes in the data and
-    // draws it.   
     
-     /*  ##############세션에 저장된 ArrayList 사용 코드###################### */
-    //var chartData = '${sessionScope.area}';
-
-     /*  ##############세션에 저장된 ArrayList 확인 ###################### */
-    //alert(charData);
-
     function drawChart1() {
  
         // Create the data table.
@@ -54,21 +45,26 @@
         data1.addColumn('number', '매출');
         
         /*  ##############실제 데이터 받는 코드###################### */
-//        data1.addRows([
-//          for (var i=1; i < chart.length; i++){
-//        	  [chartData[i].setDate, chartData[i].setSales]
-//          }
-//        ]);
-       
-       /*  ##############test data####################### */
         data1.addRows([
-        	['2016', 20],
-        	['2017', 30]
-        ]);
-        
+			  ['${sessionScope.area0.date}', ${sessionScope.area0.sales}],
+        	  ['${sessionScope.area1.date}', ${sessionScope.area1.sales}],
+        	  ['${sessionScope.area2.date}', ${sessionScope.area2.sales}],
+        	  ['${sessionScope.area3.date}', ${sessionScope.area3.sales}],
+        	  ['${sessionScope.area4.date}', ${sessionScope.area4.sales}],
+        	  ['${sessionScope.area5.date}', ${sessionScope.area5.sales}],
+        	  ['${sessionScope.area6.date}', ${sessionScope.area6.sales}],
+        	  ['${sessionScope.area7.date}', ${sessionScope.area7.sales}],
+        	  ['${sessionScope.area8.date}', ${sessionScope.area8.sales}],
+        	  ['${sessionScope.area9.date}', ${sessionScope.area9.sales}],
+        	  ['${sessionScope.area10.date}', ${sessionScope.area10.sales}],
+        	  ['${sessionScope.area11.date}', ${sessionScope.area11.sales}],
+        	  ['${sessionScope.area12.date}', ${sessionScope.area12.sales}],
+        	  ['${sessionScope.area13.date}', ${sessionScope.area13.sales}]
+        ]);   
+
         // Set chart options
         var options1 = {'title':'매출 현황',
-                       'height':300};
+                       'height':430};
         
         // Instantiate and draw our chart, passing in some options.
         var chart1 = new google.charts.Line(document.getElementById('chart_div1'));
@@ -86,27 +82,30 @@
        
         
         /*  ##############실제 데이터 받는 코드###################### */
-//        data2.addRows([
-//        	for (var i=1; i < chart.length; i++){
-//          	  [chartData[i].setDate, chartData[i].setTotalPeople, chartData[i].setTotalLivingPeople, chartData[i].setTotalBizman]
-//            }
-//        ]);
-        
         data2.addRows([
-        	['2016', 20, 30, 40],
-        	['2017', 30, 20, 10]
+		     [ '${sessionScope.area0.date}',  ${sessionScope.area0.totalPeople}, ${sessionScope.area0.totalLivingPeople}, ${sessionScope.area0.totalBizman}],
+	      	 [ '${sessionScope.area1.date}',  ${sessionScope.area1.totalPeople}, ${sessionScope.area1.totalLivingPeople}, ${sessionScope.area1.totalBizman}],
+	      	 [ '${sessionScope.area2.date}',  ${sessionScope.area2.totalPeople}, ${sessionScope.area2.totalLivingPeople}, ${sessionScope.area2.totalBizman}],
+	      	 [ '${sessionScope.area3.date}',  ${sessionScope.area3.totalPeople}, ${sessionScope.area3.totalLivingPeople}, ${sessionScope.area3.totalBizman}],
+	      	 [ '${sessionScope.area4.date}',  ${sessionScope.area4.totalPeople}, ${sessionScope.area4.totalLivingPeople}, ${sessionScope.area4.totalBizman}],
+	      	 [ '${sessionScope.area5.date}',  ${sessionScope.area5.totalPeople}, ${sessionScope.area5.totalLivingPeople}, ${sessionScope.area5.totalBizman}],
+	      	 [ '${sessionScope.area6.date}',  ${sessionScope.area6.totalPeople}, ${sessionScope.area6.totalLivingPeople}, ${sessionScope.area6.totalBizman}],
+	      	 [ '${sessionScope.area7.date}',  ${sessionScope.area7.totalPeople}, ${sessionScope.area7.totalLivingPeople}, ${sessionScope.area7.totalBizman}],
+	      	 [ '${sessionScope.area8.date}',  ${sessionScope.area8.totalPeople}, ${sessionScope.area8.totalLivingPeople}, ${sessionScope.area8.totalBizman}],
+	      	 [ '${sessionScope.area9.date}',  ${sessionScope.area9.totalPeople}, ${sessionScope.area9.totalLivingPeople}, ${sessionScope.area9.totalBizman}],
+	      	 [ '${sessionScope.area10.date}',  ${sessionScope.area10.totalPeople}, ${sessionScope.area10.totalLivingPeople}, ${sessionScope.area10.totalBizman}],
+	      	 [ '${sessionScope.area11.date}',  ${sessionScope.area11.totalPeople}, ${sessionScope.area11.totalLivingPeople}, ${sessionScope.area11.totalBizman}],
+	      	 [ '${sessionScope.area12.date}',  ${sessionScope.area12.totalPeople}, ${sessionScope.area12.totalLivingPeople}, ${sessionScope.area12.totalBizman}],
+	       	 [ '${sessionScope.area13.date}',  ${sessionScope.area13.totalPeople}, ${sessionScope.area13.totalLivingPeople}, ${sessionScope.area13.totalBizman}]
         ]);
-        
+   
         // Set chart options
         var options2 = {
         		chart: {'title':'유동 인구, 상주 인구, 직장인 인구 현황'},
         		bars: 'vertical',
-        		height:300
+        		'height': 430
         };
-        /*var options2 = {'title':'유동 인구, 상주 인구, 직장인 인구 현황',
-                       'width':400,
-                       'height':300,
-                       'pieHole': 0.4,};*/
+
         
         // Instantiate and draw our chart, passing in some options.
         
@@ -118,24 +117,34 @@
         // Create the data table.
         var data3 = new google.visualization.DataTable();
         data3.addColumn('string', 'date');
-        data3.addColumn('number', '매장수');
+        data3.addColumn('number', '주요기관 수');
         
         
         /*  ##############실제 데이터 받는 코드###################### */
-//        data3.addRows([
-//          for (var i=1; i < chart.length; i++){
-//        	  [chartData[i].setDate, chartData[i].setTotalStore]
-//          }
-//        ]);
-        
         data3.addRows([
-        	['2016', 5],
-        	['2016', 30]
+          	  ['${sessionScope.area0.date}', ${sessionScope.area0.totalFacility}],
+        	  ['${sessionScope.area1.date}', ${sessionScope.area1.totalFacility}],
+        	  ['${sessionScope.area2.date}', ${sessionScope.area2.totalFacility}],
+        	  ['${sessionScope.area3.date}', ${sessionScope.area3.totalFacility}],
+        	  ['${sessionScope.area4.date}', ${sessionScope.area4.totalFacility}],
+        	  ['${sessionScope.area5.date}', ${sessionScope.area5.totalFacility}],
+        	  ['${sessionScope.area6.date}', ${sessionScope.area6.totalFacility}],
+        	  ['${sessionScope.area7.date}', ${sessionScope.area7.totalFacility}],
+        	  ['${sessionScope.area8.date}', ${sessionScope.area8.totalFacility}],
+        	  ['${sessionScope.area9.date}', ${sessionScope.area9.totalFacility}],
+        	  ['${sessionScope.area10.date}', ${sessionScope.area10.totalFacility}],
+        	  ['${sessionScope.area11.date}', ${sessionScope.area11.totalFacility}],
+        	  ['${sessionScope.area12.date}', ${sessionScope.area12.totalFacility}],
+        	  ['${sessionScope.area13.date}', ${sessionScope.area13.totalFacility}]
         ]);
+        
        
         // Set chart options
-        var options3 = {'title':'매장 수 현황',
-                       'height':300};
+        var options3 = {chart:{
+			'title':'상권 내 주요기관 현황',
+			'subtitle': '주요기관: 대학, 병원, 기업, 공공기관 등'
+			},
+               'height': 430};
         
         // Instantiate and draw our chart, passing in some options.
         var chart3 = new google.charts.Line(document.getElementById('chart_div3'));
@@ -150,16 +159,24 @@
         
         
         /*  ##############실제 데이터 받는 코드###################### */
-//        data4.addRows([
-//          for (var i=1; i < chart.length; i++){
-//        	  [chartData[i].setDate, chartData[i].setTotalFacility]
-//          }
-//        ]);
-        
         data4.addRows([
-        	['2016', 40],
-        	['2017', 20]
+        	  ['${sessionScope.area0.date}', ${sessionScope.area0.totalFacility}],
+        	  ['${sessionScope.area1.date}', ${sessionScope.area1.totalFacility}],
+        	  ['${sessionScope.area2.date}', ${sessionScope.area2.totalFacility}],
+        	  ['${sessionScope.area3.date}', ${sessionScope.area3.totalFacility}],
+        	  ['${sessionScope.area4.date}', ${sessionScope.area4.totalFacility}],
+        	  ['${sessionScope.area5.date}', ${sessionScope.area5.totalFacility}],
+        	  ['${sessionScope.area6.date}', ${sessionScope.area6.totalFacility}],
+        	  ['${sessionScope.area7.date}', ${sessionScope.area7.totalFacility}],
+        	  ['${sessionScope.area8.date}', ${sessionScope.area8.totalFacility}],
+        	  ['${sessionScope.area9.date}', ${sessionScope.area9.totalFacility}],
+        	  ['${sessionScope.area10.date}', ${sessionScope.area10.totalFacility}],
+        	  ['${sessionScope.area11.date}', ${sessionScope.area11.totalFacility}],
+        	  ['${sessionScope.area12.date}', ${sessionScope.area12.totalFacility}],
+        	  ['${sessionScope.area13.date}', ${sessionScope.area13.totalFacility}]
         ]);
+        
+
        
         // Set chart options
         var options4 = {
@@ -167,7 +184,7 @@
         			'title':'상권 내 주요기관 현황',
         			'subtitle': '주요기관: 대학, 병원, 기업, 공공기관 등'
         			},
-                       'height':300};
+                       'height':450};
         
         // Instantiate and draw our chart, passing in some options.
         var chart4 = new google.charts.Line(document.getElementById('chart_div4'));
@@ -193,9 +210,14 @@
 								<!-- 업종분석 이동 탭 -->
 								<div class="tabs-line" id="famenu_upjong" style="">
 									<h2 class="famenu-title">
-										<a href="mapService.jsp">상권분석 보고서 </a>
+										<a href="mapService.jsp">상권분석 보고서 </a><font color="#2e70c2">: ${sessionScope.gu}</font> <font color="#2e70c2">${sessionScope.dong}</font>
 									</h2>
-
+									<ul class="nav nav-tabs depth-3" role="tablist">
+			                            <li><a href="javascript:moveBtn('category1')">1. 매출액 추이</a></li>
+			                            <li><a href="javascript:moveBtn('category2')">2. 유동, 상주, 직장인 인구 추이</a></li>
+			                            <li><a href="javascript:moveBtn('category3')">3. 주요 기관 추이</a></li>
+			                            <li><a href="javascript:moveBtn('category5')">4. 업종 생애주기</a></li>
+			                        </ul>
 									<span class="report-btn"> <a href="javascript:void(0)"
 										data-ng-click="print('D')" class="btn btn-report"
 										title="출력 버튼"> <i class="fa fa-print" aria-hidden="true"></i>
@@ -208,6 +230,7 @@
 							</div>
 						</div>
 						<!-- /탭(2차) -->
+						
 
 						<div class="container">
 							<div class="tab-content mheight">
@@ -224,6 +247,7 @@
 												
 												<div class="boxwrap ng-scope">
 													<p class="text-center"></p>
+													<!--  테두리 박스 -->
 													<div id="areaJisu1ChartDiv" style="text-align: center; width: 863px; height: 450px;" class="img-responsive">
 														<div class="rMateChartH5__Root" id="areaJisu1Chart" style="box-sizing: content-box; position: absolute; overflow: visible; width: 841px; height: 428px; padding: 15px 10px 5px; border-width: 1px; border-color: rgb(170, 179, 179); background-color: rgb(255, 255, 255); border-radius: 12px; border-style: none;">
 															<div id="chart_div1" style="border: 1px solid #ccc"></div>
@@ -255,7 +279,7 @@
 												<!-- 매장수 추이  -->
 												<p class="clearfix ng-scope" id="category2"></p>
 												<p class="fmenu-space ng-scope"></p>
-												<h3 class="ng-scope">3. 매장수 추이</h3>
+												<h3 class="ng-scope">3. 주요기관 추이</h3>
 
 												<div class="boxwrap ng-scope">
 													<p class="text-center"></p>
