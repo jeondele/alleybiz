@@ -6939,6 +6939,11 @@ h2 {
 	padding-bottom: 50px;
 }
 
+.container-bottom {
+	/* padding-top: 20px; */
+	padding-bottom: 0px;
+}
+
 .container-team {
 	padding-top: 20px;
 	padding-bottom: 50px;
