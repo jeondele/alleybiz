@@ -63,8 +63,9 @@
         ]);   
 
         // Set chart options
-        var options1 = {'title':'매출 현황',
+        var options1 = {
                        'height':430};
+        //'title':'매출 현황',
         
         // Instantiate and draw our chart, passing in some options.
         var chart1 = new google.charts.Line(document.getElementById('chart_div1'));
@@ -101,11 +102,12 @@
    
         // Set chart options
         var options2 = {
-        		chart: {'title':'유동 인구, 상주 인구, 직장인 인구 현황'},
+        		
         		bars: 'vertical',
         		'height': 430
         };
 
+        //chart: {'title':'유동 인구, 상주 인구, 직장인 인구 현황'},
         
         // Instantiate and draw our chart, passing in some options.
         
@@ -140,12 +142,15 @@
         
        
         // Set chart options
-        var options3 = {chart:{
-			'title':'상권 내 주요기관 현황',
+        var options3 = {
+               'height': 430};
+        /*
+			chart:{	
+        	'title':'상권 내 주요기관 현황',
 			'subtitle': '주요기관: 대학, 병원, 기업, 공공기관 등'
 			},
-               'height': 430};
-        
+        */       
+               
         // Instantiate and draw our chart, passing in some options.
         var chart3 = new google.charts.Line(document.getElementById('chart_div3'));
         chart3.draw(data3, google.charts.Line.convertOptions(options3));
@@ -155,25 +160,25 @@
         // Create the data table.
         var data4 = new google.visualization.DataTable();
         data4.addColumn('string', 'date');
-        data4.addColumn('number', '주요기관 수');
+        data4.addColumn('number', '점포 수');
         
         
         /*  ##############실제 데이터 받는 코드###################### */
         data4.addRows([
-        	  ['${sessionScope.area0.date}', ${sessionScope.area0.totalFacility}],
-        	  ['${sessionScope.area1.date}', ${sessionScope.area1.totalFacility}],
-        	  ['${sessionScope.area2.date}', ${sessionScope.area2.totalFacility}],
-        	  ['${sessionScope.area3.date}', ${sessionScope.area3.totalFacility}],
-        	  ['${sessionScope.area4.date}', ${sessionScope.area4.totalFacility}],
-        	  ['${sessionScope.area5.date}', ${sessionScope.area5.totalFacility}],
-        	  ['${sessionScope.area6.date}', ${sessionScope.area6.totalFacility}],
-        	  ['${sessionScope.area7.date}', ${sessionScope.area7.totalFacility}],
-        	  ['${sessionScope.area8.date}', ${sessionScope.area8.totalFacility}],
-        	  ['${sessionScope.area9.date}', ${sessionScope.area9.totalFacility}],
-        	  ['${sessionScope.area10.date}', ${sessionScope.area10.totalFacility}],
-        	  ['${sessionScope.area11.date}', ${sessionScope.area11.totalFacility}],
-        	  ['${sessionScope.area12.date}', ${sessionScope.area12.totalFacility}],
-        	  ['${sessionScope.area13.date}', ${sessionScope.area13.totalFacility}]
+        	  ['${sessionScope.area0.date}', ${sessionScope.area0.stores}],
+        	  ['${sessionScope.area1.date}', ${sessionScope.area1.stores}],
+        	  ['${sessionScope.area2.date}', ${sessionScope.area2.stores}],
+        	  ['${sessionScope.area3.date}', ${sessionScope.area3.stores}],
+        	  ['${sessionScope.area4.date}', ${sessionScope.area4.stores}],
+        	  ['${sessionScope.area5.date}', ${sessionScope.area5.stores}],
+        	  ['${sessionScope.area6.date}', ${sessionScope.area6.stores}],
+        	  ['${sessionScope.area7.date}', ${sessionScope.area7.stores}],
+        	  ['${sessionScope.area8.date}', ${sessionScope.area8.stores}],
+        	  ['${sessionScope.area9.date}', ${sessionScope.area9.stores}],
+        	  ['${sessionScope.area10.date}', ${sessionScope.area10.stores}],
+        	  ['${sessionScope.area11.date}', ${sessionScope.area11.stores}],
+        	  ['${sessionScope.area12.date}', ${sessionScope.area12.stores}],
+        	  ['${sessionScope.area13.date}', ${sessionScope.area13.stores}]
         ]);
         
 
@@ -181,8 +186,7 @@
         // Set chart options
         var options4 = {
         		chart:{
-        			'title':'상권 내 주요기관 현황',
-        			'subtitle': '주요기관: 대학, 병원, 기업, 공공기관 등'
+        			'title':'동종 상점 추이'
         			},
                        'height':450};
         
@@ -230,7 +234,7 @@
 							</div>
 						</div>
 						<!-- /탭(2차) -->
-						
+
 
 						<div class="container">
 							<div class="tab-content mheight">
@@ -238,18 +242,21 @@
 									<div class="report">
 										<div id="analysisResultupjong" style="">
 											<div id="resultUpjong" ng-include="analysisResultInfo.upjong">
-												
-												
+
+
 												<!-- 매출액 추이  -->
 												<p class="clearfix ng-scope" id="category1"></p>
 												<p class="fmenu-space ng-scope"></p>
 												<h3 class="ng-scope">1. 매출액 추이</h3>
-												
+
 												<div class="boxwrap ng-scope">
 													<p class="text-center"></p>
 													<!--  테두리 박스 -->
-													<div id="areaJisu1ChartDiv" style="text-align: center; width: 863px; height: 450px;" class="img-responsive">
-														<div class="rMateChartH5__Root" id="areaJisu1Chart" style="box-sizing: content-box; position: absolute; overflow: visible; width: 841px; height: 428px; padding: 15px 10px 5px; border-width: 1px; border-color: rgb(170, 179, 179); background-color: rgb(255, 255, 255); border-radius: 12px; border-style: none;">
+													<div id="areaJisu1ChartDiv"
+														style="text-align: center; width: 863px; height: 450px;"
+														class="img-responsive">
+														<div class="rMateChartH5__Root" id="areaJisu1Chart"
+															style="box-sizing: content-box; position: absolute; overflow: visible; width: 841px; height: 428px; padding: 15px 10px 5px; border-width: 1px; border-color: rgb(170, 179, 179); background-color: rgb(255, 255, 255); border-radius: 12px; border-style: none;">
 															<div id="chart_div1" style="border: 1px solid #ccc"></div>
 														</div>
 													</div>
@@ -265,9 +272,11 @@
 
 												<div class="boxwrap ng-scope">
 													<p class="text-center"></p>
-													<div id="areaJisu1ChartDiv" style="text-align: center; width: 863px; height: 450px;"
+													<div id="areaJisu1ChartDiv"
+														style="text-align: center; width: 863px; height: 450px;"
 														class="img-responsive">
-														<div class="rMateChartH5__Root" id="areaJisu1Chart" style="box-sizing: content-box; position: absolute; overflow: visible; width: 841px; height: 428px; padding: 15px 10px 5px; border-width: 1px; border-color: rgb(170, 179, 179); background-color: rgb(255, 255, 255); border-radius: 12px; border-style: none;">
+														<div class="rMateChartH5__Root" id="areaJisu1Chart"
+															style="box-sizing: content-box; position: absolute; overflow: visible; width: 841px; height: 428px; padding: 15px 10px 5px; border-width: 1px; border-color: rgb(170, 179, 179); background-color: rgb(255, 255, 255); border-radius: 12px; border-style: none;">
 															<div id="chart_div2" style="border: 1px solid #ccc"></div>
 														</div>
 													</div>
@@ -275,17 +284,19 @@
 												</div>
 												<p class="clearfix ng-scope"></p>
 
-
 												<!-- 매장수 추이  -->
 												<p class="clearfix ng-scope" id="category2"></p>
 												<p class="fmenu-space ng-scope"></p>
-												<h3 class="ng-scope">3. 주요기관 추이</h3>
+												<h3 class="ng-scope">3. 동종 상점 추이</h3>
 
 												<div class="boxwrap ng-scope">
 													<p class="text-center"></p>
-													<div id="areaJisu1ChartDiv" style="text-align: center; width: 863px; height: 450px;" class="img-responsive">
-														<div class="rMateChartH5__Root" id="areaJisu1Chart" style="box-sizing: content-box; position: absolute; overflow: visible; width: 841px; height: 428px; padding: 15px 10px 5px; border-width: 1px; border-color: rgb(170, 179, 179); background-color: rgb(255, 255, 255); border-radius: 12px; border-style: none;">
-															<div id="chart_div3" style="border: 1px solid #ccc"></div>
+													<div id="areaJisu1ChartDiv"
+														style="text-align: center; width: 863px; height: 450px;"
+														class="img-responsive">
+														<div class="rMateChartH5__Root" id="areaJisu1Chart"
+															style="box-sizing: content-box; position: absolute; overflow: visible; width: 841px; height: 428px; padding: 15px 10px 5px; border-width: 1px; border-color: rgb(170, 179, 179); background-color: rgb(255, 255, 255); border-radius: 12px; border-style: none;">
+															<div id="chart_div4" style="border: 1px solid #ccc"></div>
 														</div>
 													</div>
 													<p></p>
@@ -295,19 +306,21 @@
 												<!-- 주요 시설 추이 -->
 												<p class="clearfix ng-scope" id="category2"></p>
 												<p class="fmenu-space ng-scope"></p>
-												<h3 class="ng-scope">4. 주요시설 추이</h3>
+												<h3 class="ng-scope">4. 주요기관 추이</h3>
 
 												<div class="boxwrap ng-scope">
 													<p class="text-center"></p>
-													<div id="areaJisu1ChartDiv" style="text-align: center; width: 863px; height: 450px;" class="img-responsive">
-														<div class="rMateChartH5__Root" id="areaJisu1Chart" style="box-sizing: content-box; position: absolute; overflow: visible; width: 841px; height: 428px; padding: 15px 10px 5px; border-width: 1px; border-color: rgb(170, 179, 179); background-color: rgb(255, 255, 255); border-radius: 12px; border-style: none;">
-															<div id="chart_div4" style="border: 1px solid #ccc"></div>
+													<div id="areaJisu1ChartDiv"
+														style="text-align: center; width: 863px; height: 450px;"
+														class="img-responsive">
+														<div class="rMateChartH5__Root" id="areaJisu1Chart"
+															style="box-sizing: content-box; position: absolute; overflow: visible; width: 841px; height: 428px; padding: 15px 10px 5px; border-width: 1px; border-color: rgb(170, 179, 179); background-color: rgb(255, 255, 255); border-radius: 12px; border-style: none;">
+															<div id="chart_div3" style="border: 1px solid #ccc"></div>
 														</div>
 													</div>
 													<p></p>
 												</div>
 												<p class="clearfix ng-scope"></p>
-
 											</div>
 										</div>
 
@@ -396,5 +409,32 @@ function CloseLayerPopDataSourceArea(){
 </script>
 		</div>
 	</div>
+	
+<style>
+.scrollTopBtn {
+ 	display: none;
+ 	position: fixed;
+ 	bottom: 30px;
+ 	right: 20px;
+ 	z-index: 99;
+ 	border: 1px solid #0092cb;/* 버튼 테두리 색상을 바꿀 경우 #0092cb 를 다른 색상값으로 바꿔주세요. */
+ 	outline: none;
+ 	background-color: #00a1e0; /* 버튼 배경색을 바꿀 경우 #00a1e0 을 다른 색상값으로 바꿔주세요. */
+ 	font-size: 1em;/* 텍스트 크기를 바꾸려면 숫자를 바꿔주세요. 예로 들면 1.25em */
+ 	font-weight: bold;
+ 	cursor: pointer;
+ 	padding: 13px 17px;/* 텍스트 사방에 여백을 더 주려면 숫자를 바꿔주세요. 13px 은 상하, 17px 은 좌우 */
+ 	border-radius: 4px; /*사각형 모서리의 둥근 정도를 바꾸려면 숫자를 바꿔주세요. 0px 은 직사각형입니다. */
+}
+.scrollTopBtn:hover {
+	border: 1px solid #303030; /* 버튼 테두리 색상을 바꿀 경우 #0092cb를 다른 색상값으로 바꿔주세요. */
+ 	background-color: #333333; /* 버튼 배경색을 바꿀 경우 #00a1e0을 다른 색상값으로 바꿔주세요. */
+}
+</style>
+
+<a href="mapService.jsp;" class="scrollTopBtn" style="position:fixed; right:25px; bottom:25px; display:block; color:#ffffff; z-index:999" id="click">뒤로돌아가기</a>
+<!-- /* 버튼의 위치를 변경하려면, right와 bottom의 픽셀(px) 값을 바꿔주세요. */
+/* 텍스트 색상을 바꾸려면, color: #ffffff 의 색상값을 바꿔주세요. */
+/* 텍스트를 바꾸려면, 한글로 써진 부분을 바꿔주세요. 예를 들면 [상단이동]을 [TOP]으로 바꿀 수 있습니다. */ -->
 </body>
 </html>
